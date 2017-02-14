@@ -41,6 +41,11 @@ Maak een simpele aanpassing op je lokale machine en push deze naar de website.
 
 Toon aan de lector als je een git pull doet dat de website aangepast word.
 
+### Voorbereiding
+
+Installeer vagrant [https://www.vagrantup.com/]() en run het volgende commando  
+`vagrant init ubuntu/xenial64; vagrant up --provider virtualbox` 
+
 ## Noot
 Nu heb je eigenlijk een productie machine opgezet. Deze machine is de laatste
 bestemming voor je code. Maar het kan gevaarlijk zijn als je code rechstreeks
