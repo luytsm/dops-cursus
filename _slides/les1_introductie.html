@@ -1,0 +1,328 @@
+---
+title: "Les 1: Introductie"
+description: "Devopswaisda?"
+reveal:
+---
+<section>
+  <img src="img/devops_omg.jpeg" alt="">
+</section>
+<section>
+  <img src="img/what_is_devops.png" alt="">
+</section>
+<section>
+  <div style="display:flex; justify-content: center;">
+    <div style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+      <h1>Dev</h1>
+      <ul>
+        <h5>
+          <li class="fragment">De ontwikkelaars</li>
+          <li class="fragment">Veranderende kracht</li>
+          <li class="fragment">Voegt features toe of verandert ze</li>
+          <li class="fragment">Snelle turnover</li>
+        </h5>
+      </ul>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+      <h1>Ops</h1>
+      <ul>
+        <h5>
+          <li class="fragment">Het IT Personeel</li>
+          <li class="fragment">Willen stabiliteit</li>
+          <li class="fragment">Verbeteren de service</li>
+          <li class="fragment">Trage Turnover</li>
+        </h5>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">
+    In deze slide de naam devops ontleden en een beeld schetsen van klasieke 
+  </aside>
+</section>
+<section>
+  <img style="margin: auto;" src="img/traditional_roles.png" alt="">
+</section>
+<section>
+  <h1>Er ontstaan problemen...</h1>
+  <ul>
+    <li>Geen band tussen beide groepen</li>
+    <ul><li>Zorgt voor conflicten en delays</li></ul>
+    <li>Devs leveren geen stabiele software af</li>
+    <ul><li>Ops weigeren codebase up te daten</li></ul>
+    <li>Processen verschillen</li>
+    <ul>
+      <li>Development proces is Agile</li>
+      <li>Operations proces is statisch</li>
+    </ul>
+  </ul>
+</section>
+<section>
+  <h1>We missen het doel...</h1>
+  <img style="margin: auto; height: 700px;" src="img/open_for_business.jpg" alt="">
+</section>
+<section>
+  <h1>Silos</h1>
+  <img class="plain" style="background: none;" src="img/dev_ops_silo.png" alt="">
+</section>
+<section>
+  <h1>Silos</h1>
+  <img class="plain" style="background: none; margin: auto;" src="img/dev_ops_devops_silo.png" alt="">
+</section><section>
+  <h1>Silos</h1>
+  <img class="plain" style="background: none; margin: auto;" src="img/devops_silo.png" alt="">
+</section><section>
+  <h1>Silos</h1>
+  <img class="plain" style="background: none; margin: auto;" src="img/silos_finalform.png" alt="">
+  <h4>Final form?</h4>
+</section>
+<section>
+  <h1>Dev of Ops?</h1>
+  <ul>
+    <h5>
+      <li class="fragment">Er is een probleem met het builden van de code?</li>
+      <li class="fragment">Je kan niet inloggen op de applicatie in de test omgeving?</li>
+      <li class="fragment">6 Dagen na een succesvolle deployment, crashed de applicatie</li>
+    </h5>
+  </ul>
+</section>
+<section>
+  <h1>Mentaliteit</h1>
+  <img style="margin: auto;" src="img/worked_in_dev.jpeg" alt="">
+</section>
+<section>
+  <h2>Er is een mentaliteit shift nodig</h2>
+  <h2 class="fragment">Een van gedeelte verantwoordelijkheid</h2>
+  <h2 class="fragment">Waarom?</h2>
+</section>
+<section>
+  <h1>IT Staat Niet Stil</h1>
+  <img style="margin: auto;" src="img/change_is_coming.jpg" alt="">
+</section>
+<section>
+  <img style="margin: auto;" src="img/its_though.png" alt="">
+</section>
+<section>
+  <img style="margin: auto;" src="img/delivery_challenges.png" alt="">
+</section>
+<section>
+  <h1>Mindset realiseren</h1>
+  <h3>CAMS</h3>
+  <ul>
+    <h5>
+      <li>Culture</li>
+      <li>Automation</li>
+      <li>Metrics</li>
+      <li>Sharing</li>
+    </h5>
+  </ul>
+</section>
+<section>
+  <h1>Culture</h1>
+  <ul>
+    <h5><li>Relaties</li></h5>
+    <ul>
+      <li>Engageer iedereen</li>
+      <li>Doorbreek de silos</li>
+      <li>Wees open</li>
+      <li>Geen blame game</li>
+    </ul>
+    <h5><li>Communicatie</li></h5>
+    <ul>
+      <li>Betrek iedereen</li>
+      <li>Stel vragen</li>
+      <li>Durf nee te zeggen</li>
+      <li>Transparantie</li>
+    </ul>
+  </ul>
+</section>
+<section>
+  <h1>Automatisatie</h1>
+  <div style="display:flex;  align-items:center;">
+  <ul style="width: 50%;">
+    <h5>
+      <li>Repetitieve handelingen zijn fout gevoelig</li>
+    </h5>
+    <h5>
+      <li>Machines kunnen dit beter</li>
+    </h5>
+    <h5>
+      <li>Consistentie en states</li>
+    </h5>
+    <h5>
+      <li>Snel en efficient</li>
+    </h5>
+    <h5>
+      <li>5'/dag = 2.6 dagen/jaar</li>
+    </h5>
+  </ul>
+  <ul class="fragment" style="width: 50%;">
+    <h5>
+      <li>Wat kan er geautomatiseerd worden</li>
+    </h5>
+    <ul>
+      <li class="fragment">Builds</li>
+      <li class="fragment">Deployments</li>
+      <li class="fragment">Testing</li>
+      <li class="fragment">Monitoring</li>
+      <li class="fragment">Self healing</li>
+      <li class="fragment">Systeem configuratie</li>
+    </ul>
+  </ul>
+  </div>
+</section>
+<section>
+  <h1>Measure</h1>
+  <ul>
+    <h5>
+      <li>Meet, Evalueer, Verbeter</li>
+      <li>Helpt in :</li>
+      <ul>
+        <li>Resource planning</li>
+        <li>Analyseren trends</li>
+        <li>Zoeken van fouten</li>
+      </ul>
+      <li>Zo simpel als het verzamelen van logs</li>
+    </h5>
+  </ul>
+</section>
+<section>
+  <h1>Measure</h1>
+  <h3>MTTD</h3>
+  <h5>Mean Time To Diagnose</h5>
+  <h3>MTTR</h3>
+  <h5>Mean Time To Repair</h5>
+</section>
+<section>
+  <h1>Sharing</h1>
+  <ul>
+    <h5>
+      <li>Deel</li>
+    </h5>
+    <ul>
+      <li>Ideeën</li>
+      <li>Metrics</li>
+    </ul>
+    <h5>
+      <li>Doorbreek de silos</li>
+    </h5>
+    <ul>
+      <li>Ops: geef shell acces aan de devs</li>
+      <li>Devs: Gebruik bestaande IT technologie naar jouw voordeel</li>
+    </ul>
+  </ul>
+</section>
+<section>
+  <h1>Samengevat</h1>
+  <h2>Release Early, Release often</h2>
+  <h2>You Build It, You Run It</h2>
+  <h2>Break Things Early And Often</h2>
+</section>
+<section>
+  <h2>Mentaliteit daar zijn we vet mee!</h2>
+</section>
+<section>
+  <h1>DevOps in de Praktijk</h1>
+  <div style="display:flex; justify-content: center;">
+    <div style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+      <ul>
+        <h3>
+          <li>Infrastructure as Code</li>
+          <li>Continuous Integration</li>
+          <li>Automated Testing</li>
+          <li>Continuous Deployment</li>
+          <li>Release Management</li>
+          <li>App Performance Monitoring</li>
+          <li>Load Testing & Auto-Scale</li>
+        </h3>
+      </ul>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+      <ul>
+        <li>Availability Monitoring</li>
+        <li>Change Configuration Management</li>
+        <li>Feature Flags</li>
+        <li>Automated Environment De-Provisioning</li>
+        <li>Self Service Environments</li>
+        <li>Automated Recovery (Rollback Roll-Forward)</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">
+    In deze slide de naam devops ontleden en een beeld schetsen van klasieke 
+  </aside>
+</section>
+<section data-background-image="img/periodic_table_devops.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section>
+  <h1>Demo</h1>
+</section>
+<section>
+  <h1>DevOps Cyclus</h1>
+  <img style="margin: auto;" src="img/devops_cyclus.png" alt="">
+</section>
+<section data-background-image="img/plan.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/dev_test.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/ci.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/auto_test.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/cd.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/release_management.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/iac.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/load_test_auto_scale.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/monitor_learn.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/Selection_006.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/Selection_007.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/Selection_008.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/Selection_009.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/Selection_010.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/Selection_011.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section>
+  <h1>Wat gaan we niet doen...</h1>
+  <ul>
+    <h3>
+      <li>Een extra team maken</li>
+      <li>Geen opertaties</li>
+      <li>Geen project</li>
+      <li>Problemen oplossen met alleen maar tools</li>
+    </h3>
+  </ul>
+</section>
+<section data-background-image="img/devops_result.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/devops_performance.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/devops_performance1.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/devops_performance2.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section>
+  <h1>DevOps in de Opleiding</h1>
+</section>
+<section data-background-image="img/getiing_started.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section>
+  <h1>DevOps in de Opleiding</h1>
+  <ul>
+    <h3>
+      <li>Git</li>
+      <li>Vagrant</li>
+      <li>Ansible</li>
+      <li>Docker</li>
+      <li>Project</li>
+      <li>Gastsprekers</li>
+    </h3>
+  </ul>
+</section>
