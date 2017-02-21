@@ -1,0 +1,462 @@
+---
+title: "Les 2: Releasing Software"
+description: "Software in productie brengen"
+reveal:
+---
+<section>
+  <h1>Releasing Software</h1>
+</section>
+<section>
+  <h1>DevOps Cyclus</h1>
+  <img style="height: 800px;"src="img/devops_cyclus.png" alt="">
+</section>
+<section>
+  <h1>DevOps Cyclus (Expanded)</h1>
+  <img class="plain" style="background: none; height: 900px;" src="img/devops_cyclus_infinite.png" alt="">
+</section>
+<section>
+  <h1>DevOps Cyclus (Expanded)</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h3>
+        <li>Plan</li>
+      </h3>
+      <ul>
+        <h5>
+          <li>Analyseren verzamelde data</li>
+          <li>Analyseren opdracht</li>
+          <li>Opstallen backlog</li>
+        </h5>
+      </ul>
+      <h3>
+        <li>Code</li>
+      </h3>
+      <ul>
+        <h5>
+          <li>Iniitial Commit</li>
+          <li>Feature toevoegen</li>
+          <li>Bugfix</li>
+        </h5>
+      </ul>
+    </ul>
+    <img class="plain" style="background: none; width: 35%; height: 400px;" src="img/devops_cyclus_infinite.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>DevOps Cyclus (Expanded)</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h3>
+        <li>Build</li>
+      </h3>
+      <ul>
+        <h5>
+          <li>Compilatie / Bundelen </li>
+          <li>Target Environment</li>
+          <li>Build artifacts</li>
+          <li>Complex process</li>
+        </h5>
+      </ul>
+    </ul>
+    <img class="plain" style="background: none; width: 35%; height: 400px;" src="img/devops_cyclus_infinite.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>DevOps Cyclus (Expanded)</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h3>
+        <li>Test</li>
+      </h3>
+      <ul>
+        <h5>
+          <li>Manueel testen</li>
+          <li>Unit Test</li>
+          <li>Functioneel Testen</li>
+          <li>Non Functionele Testen</li>
+          <li>User Acceptance Test</li>
+        </h5>
+      </ul>
+    </ul>
+    <img class="plain" style="background: none; width: 35%; height: 300px;" src="img/devops_cyclus_infinite.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>DevOps Cyclus (Expanded)</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h3>
+        <li>Release</li>
+      </h3>
+      <ul>
+        <h5>
+          <li>Update VCS</li>
+          <ul>
+            <li>Commit</li>
+            <li>Mergen</li>
+          </ul>
+          <li>Release Artifactes</li>
+          <ul>
+            <li>Packages</li>
+            <li>Containerize</li>
+            <li>Bundle</li>
+          </ul>
+        </h5>
+      </ul>
+    </ul>
+    <img class="plain" style="background: none; width: 35%; height: 400px;" src="img/devops_cyclus_infinite.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>DevOps Cyclus (Expanded)</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h3>
+        <li>Deploy</li>
+      </h3>
+      <ul>
+        <h5>
+          <li>Welke omgeving?</li>
+          <li>Locatie</li>
+          <ul>
+            <li>Self Hosted</li>
+            <li>Cloud</li>
+            <ul>
+              <li>IaaS</li>
+              <li>Paas</li>
+            </ul>
+          </ul>
+        </h5>
+      </ul>
+    </ul>
+    <img class="plain" style="background: none; width: 35%; height: 400px;" src="img/devops_cyclus_infinite.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>DevOps Cyclus (Expanded)</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h3>
+        <li>Operate</li>
+      </h3>
+      <ul>
+        <h5>
+          <li>In gebruik</li>
+          <li>Failure detecteren</li>
+          <li>Genereren van feedback</li>
+        </h5>
+      </ul>
+      <h3>
+        <li>Monitor</li>
+      </h3>
+      <h5>
+        <li>Verzamelen van feedback</li>
+        <ul>
+          <li>Performance</li>
+          <li>Usage</li>
+          <li>Logs</li>
+          <li>Metrics?</li>
+        </ul>
+      </h5>
+    </ul>
+    <img class="plain" style="background: none; width: 35%; height: 400px;" src="img/devops_cyclus_infinite.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>Development Environments</h1>
+  <ul>
+    <li>We creëren meerdere omgevingen waarin onze applicatie kan draaien</li>
+    <li>Hierdoor creëren we geen single point of failure</li>
+    <li>Investering</li>
+  </ul>
+  </ul>
+</section>
+<section>
+  <h1>Development Environments</h1>
+  <div style="display: flex; flex-direction: column; height: 800px; justif-content: space-around;">
+    <div style="display: flex; justify-content: center;">
+      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+        <h4>Local Dev</h4>
+        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
+      </div>
+      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+        <h4>Testing</h4>
+        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
+      </div>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+        <h4>User Acceptance Testing</h4>
+        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
+      </div>
+      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+        <h4>Production</h4>
+        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <h1>Local Dev</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h5>
+        <li>Machine van de developer</li>
+        <li>Mogelijkheden</li>
+        <ul>
+          <li>Lokale server</li>
+          <li>Gevirtualiseerde server</li>
+          <li>Container</li>
+        </ul>
+        <li>Nabootsen Productie environment</li>
+        <ul>
+          <li>Geen productie database</li>
+          <li>Verschilt licht qua infrastructuur</li>
+        </ul>
+      </h5>
+    </ul>
+    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>Testing</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h5>
+        <li>Continuous Integration</li>
+        <ul>
+          <li>Combineren code verschillende devs</li>
+        </ul>
+        <li>Automatisatie taken</li>
+        <ul>
+          <li>Nightly Builds</li>
+          <li>Triggerd (Commits)</li>
+        </ul>
+        <li>Clean Environments</li>
+      </h5>
+    </ul>
+    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>UAT / Staging</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <ul>
+        <li>Exacte kloon productie</li>
+        <li>Finale Testing</li>
+        <li>Site voor QA Engineering</li>
+      </ul>
+    </ul>
+    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>Production Server</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h5>
+        <li>Laatste stable release</li>
+        <li>Verzamelen metrics</li>
+      </h5>
+    </ul>
+    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>From Code to Production</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <li>Zeer intensief proces</li>
+      <li>Manueel is geen optie</li>
+      <ul>
+        <li>Fout gevoelig</li>
+        <li>Twee maal een manuele actie zal niet snel twee maal hetzelfde resultaat geven</li>
+      </ul>
+    </ul>
+    <img class="plain" style="background: none; height: 800px;" src="img/my_machine.jpg" alt="">
+  </div>
+</section>
+<section data-background-image="img/automate_all_the_things.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section>
+  <h1>Automate what?</h1>
+  <ul>
+    <li>Integratie</li>
+    <li>Delivery / Deployment</li>
+    <li>Infrastructuur</li>
+  </ul>
+</section>
+<section>
+  <h1>Continuous Integration</h1>
+  <blockquote>
+    Continuous integration is an ongoing and <b>rapid process</b>. This means
+    that teams need to be able to <b>react quickly</b> when a <b>build breaks</b>
+    or new tests need to be built. In order to <b>integrate a quality</b> code
+    into existing features, it is important to <b>validate it against existing
+      tests</b>. If the tests <b>fail</b>, the code (build) should be
+    <b>rejected</b> until either the bugs are fixed or the test cases are
+    updated.  
+  </blockquote>
+</section>
+<section>
+  <h1>Continuous Integration</h1>
+  <div style="display: flex; align-items: center;">
+    <div style="text-align: left; width: 70%">
+      <h3>Met continuous integration </br>automatiseren we </h3>
+      <ul>
+        <li>Build</li>
+        <li>Commits</li>
+      </ul>
+    </div>
+    <img style="height: 500px;" src="img/ci_loop.png" alt="">
+  </div>
+</section>
+<section style="text-align: left;">
+  <h1>CI Good Practices</h1>
+  <ul>
+    <h5>
+      <li>Maintain a Single Source Repository.</li>
+      <li>Automate the Build</li>
+      <li>Make Your Build Self-Testing</li>
+      <li>Everyone Commits To the Mainline Every Day</li>
+      <li>Every Commit Should Build the Mainline on an Integration Machine</li>
+      <li>Keep the Build Fast</li>
+      <li>Test in a Clone of the Production Environment</li>
+      <li>Make it Easy for Anyone to Get the Latest Executable</li>
+      <li>Everyone can see what's happening</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h1>Maintain a Single Source Repository.</h1>
+  <ul>
+    <h5>
+      <li>Gebruik VCS (git)</li>
+      <li>Geen shared folders / drives / dropbox</li>
+      <li>Toegankelijk voor alle developers</li>
+      <li>Source code + bestanden voor builds en development</li>
+      <li>Gebruik branches voor features</li>
+      <li>Geen “binaries”</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h1>Automate the Build</h1>
+  <ul>
+    <h5>
+      <li>Automatiseer alles</li>
+      <li>Opzetten van Databases</li>
+      <li>Compileren van binaries</li>
+      <li>Files naar de juiste locatie kopieren </li>
+      <li>Build alleen de veranderingen</li>
+      <li>Build buiten een IDE</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h1>Make Your Build Self-Testing</h1>
+  <ul>
+    <h5>
+      <li>Static vs Dynamic Langauge</li>
+      <li>Linting</li>
+      <li>Run unit testing</li>
+      <li>Creeer test coverage report</li>
+      <li>Testen zijn niet onfeilbaar</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h2>Everyone Commits To the Mainline Every Day</h2>
+  <ul>
+    <h5>
+      <li>Teamwork = Communicatie → Commit = Communicatie</li>
+      <li>Testbuild voor dat je commit</li>
+      <li>Conflict detectie</li>
+      <ul>
+        <li>Sneller is beter</li>
+        <li>Meer tijd -> Moeilijkheid omhoog.</li>
+      </ul>
+      <li>Meerdere commits / dag is beter.</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h1>Keep the build fast</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h5>
+        <li>Te wijten aan niet geoptimaliseerde compilers</li>
+        <li>Rekenkracht is geen probleem meer</li>
+      </h5>
+    </ul>
+    <img style="height: 500px;" src="img/compiling.png" alt="">
+  </div>
+</section>
+<section style="text-align: left;">
+  <h2>Make it Easy for Anyone to Get the Latest Executable</h2>
+  <ul>
+    <h5>
+      <li>Rollback + Updates</li>
+      <li>Niet technisch personeel</li>
+    </h5>
+  </ul>
+  <h2>Everyone can see what's happening</h2>
+  <ul>
+    <h5>
+      <li>Communicatie is key</li>
+      <li>Developers moeten kunnen zien ofdat de build failed of passed is.</li>
+    </h5>
+  </ul>
+</section>
+
+<section data-background-image="img/ci_loop.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/cdel_loop.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/cdep_loop.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/cd_pipeline.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section>
+  <h1>Classic IT Team</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <li>Teams</li>
+      <h5>
+        <ul>
+          <li>Developers</li>
+          <li>Testers</li>
+          <li>QA</li>
+          <li>Operators</li>
+        </ul>
+        <li>Handover van code</li>
+        <li>Doorschuiven van verantwoordelijkheid</li>
+      </h5>
+    </ul>
+    <img src="img/classic_it_team.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>DevOps IT Team</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h5>
+      <li>DevOps bouwt verder op </li>
+        <ul>
+          <li>Continuous Integration</li>
+          <li>Continuous Delivery</li>
+          <li>Continuous Deployment</li>
+        </ul>
+        <li>Voegt toe:</li>
+        <ul>
+          <li>Collaboration</li>
+          <li>Automation</li>
+          <li>Monitoring</li>
+        </ul>
+      </h5>
+    </ul>
+    <img src="img/classic_it_team.png" alt="">
+  </div>
+</section>
+
