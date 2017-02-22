@@ -7,6 +7,48 @@ reveal:
   <h1>Releasing Software</h1>
 </section>
 <section>
+  <h1>Classic IT Team</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <li>Teams</li>
+      <h5>
+        <ul>
+          <li>Developers</li>
+          <li>Testers</li>
+          <li>QA</li>
+          <li>Operators</li>
+        </ul>
+        <li>Handover van code</li>
+        <li>Doorschuiven van verantwoordelijkheid</li>
+      </h5>
+    </ul>
+    <img src="img/classic_it_team.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>DevOps IT Team</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h5>
+        <li>DevOps bouwt verder op </li>
+        <ul>
+          <li>Continuous Integration</li>
+          <li>Continuous Delivery</li>
+          <li>Continuous Deployment</li>
+        </ul>
+        <li>Voegt toe:</li>
+        <ul>
+          <li>Collaboration</li>
+          <li>Automation</li>
+          <li>Monitoring</li>
+        </ul>
+      </h5>
+    </ul>
+    <img src="img/classic_it_team.png" alt="">
+  </div>
+</section>
+
+<section>
   <h1>DevOps Cyclus</h1>
   <img style="height: 800px;"src="img/devops_cyclus.png" alt="">
 </section>
@@ -163,124 +205,7 @@ reveal:
   </div>
 </section>
 <section>
-  <h1>Development Environments</h1>
-  <ul>
-    <li>We creëren meerdere omgevingen waarin onze applicatie kan draaien</li>
-    <li>Hierdoor creëren we geen single point of failure</li>
-    <li>Investering</li>
-  </ul>
-  </ul>
-</section>
-<section>
-  <h1>Development Environments</h1>
-  <div style="display: flex; flex-direction: column; height: 800px; justif-content: space-around;">
-    <div style="display: flex; justify-content: center;">
-      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
-        <h4>Local Dev</h4>
-        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
-      </div>
-      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
-        <h4>Testing</h4>
-        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
-      </div>
-    </div>
-    <div style="display: flex; align-items: center;">
-      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
-        <h4>User Acceptance Testing</h4>
-        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
-      </div>
-      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
-        <h4>Production</h4>
-        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
-      </div>
-    </div>
-  </div>
-</section>
-<section>
-  <h1>Local Dev</h1>
-  <div style="display: flex; align-items: center;">
-    <ul style="width: 70%">
-      <h5>
-        <li>Machine van de developer</li>
-        <li>Mogelijkheden</li>
-        <ul>
-          <li>Lokale server</li>
-          <li>Gevirtualiseerde server</li>
-          <li>Container</li>
-        </ul>
-        <li>Nabootsen Productie environment</li>
-        <ul>
-          <li>Geen productie database</li>
-          <li>Verschilt licht qua infrastructuur</li>
-        </ul>
-      </h5>
-    </ul>
-    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
-  </div>
-</section>
-<section>
-  <h1>Testing</h1>
-  <div style="display: flex; align-items: center;">
-    <ul style="width: 70%">
-      <h5>
-        <li>Continuous Integration</li>
-        <ul>
-          <li>Combineren code verschillende devs</li>
-        </ul>
-        <li>Automatisatie taken</li>
-        <ul>
-          <li>Nightly Builds</li>
-          <li>Triggerd (Commits)</li>
-        </ul>
-        <li>Clean Environments</li>
-      </h5>
-    </ul>
-    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
-  </div>
-</section>
-<section>
-  <h1>UAT / Staging</h1>
-  <div style="display: flex; align-items: center;">
-    <ul style="width: 70%">
-      <ul>
-        <li>Exacte kloon productie</li>
-        <li>Finale Testing</li>
-        <li>Site voor QA Engineering</li>
-      </ul>
-    </ul>
-    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
-  </div>
-</section>
-<section>
-  <h1>Production Server</h1>
-  <div style="display: flex; align-items: center;">
-    <ul style="width: 70%">
-      <h5>
-        <li>Laatste stable release</li>
-        <li>Verzamelen metrics</li>
-      </h5>
-    </ul>
-    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
-  </div>
-</section>
-<section>
-  <h1>From Code to Production</h1>
-  <div style="display: flex; align-items: center;">
-    <ul style="width: 70%">
-      <li>Zeer intensief proces</li>
-      <li>Manueel is geen optie</li>
-      <ul>
-        <li>Fout gevoelig</li>
-        <li>Twee maal een manuele actie zal niet snel twee maal hetzelfde resultaat geven</li>
-      </ul>
-    </ul>
-    <img class="plain" style="background: none; height: 800px;" src="img/my_machine.jpg" alt="">
-  </div>
-</section>
-<section data-background-image="img/automate_all_the_things.png" data-background-size="contain" data-background-color="#ffffff">
-</section>
-<section>
-  <h1>Automate what?</h1>
+  <h1>Praktisch?</h1>
   <ul>
     <li>Testen</li>
     <li>Integratie</li>
@@ -288,17 +213,42 @@ reveal:
     <li>Infrastructuur</li>
   </ul>
 </section>
+<section data-background-image="img/automate_all_the_things.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
 <section data-background-image="img/ci_loop.png" data-background-size="contain" data-background-color="#ffffff">
-  <h1 style="position: fixed; top: 0px; left: -150px; color: black;">Continuous integration</h1>
+  <h1 style="position: fixed; top: 0px; left: -100px; color: black;">Continuous integration</h1>
 </section>
 <section data-background-image="img/cdel_loop.png" data-background-size="contain" data-background-color="#ffffff">
-  <h1 style="position: fixed; bottom : 0px; left: -150px; color: black;">Continuous Delivery</h1>
+  <h1 style="position: fixed; bottom : 0px; left: -100px; color: black;">Continuous Delivery</h1>
 </section>
 <section data-background-image="img/cdep_loop.png" data-background-size="contain" data-background-color="#ffffff">
-  <h1 style="position: fixed; bottom: 0px; left: -150px; color: black;">Continuous Deployment</h1>
+  <h1 style="position: fixed; bottom: 0px; left: -100px; color: black;">Continuous Deployment</h1>
 </section>
 <section data-background-image="img/cd_pipeline.png" data-background-size="contain" data-background-color="#ffffff">
-  <h1 style="position: fixed; top: 450px; right: -2f20px; color: black; transform: rotate(90deg);">CD Pipeline</h1>
+  <h1 style="position: fixed; top: 450px; right: -220px; color: black; transform: rotate(90deg);">CD Pipeline</h1>
+</section>
+<section>
+  <h2>Onze Workflow</h2>
+  <div style="display: flex; align-items: center;">
+    <div style="text-align: left; width: 70%">
+      <ul>
+        <h5>
+          <li>Shared Resource</li>
+          <ul>
+            <li>Remote Server</li>
+            <li>Dropbox</li>
+          </ul>
+          <li>Rechstreekse integratie</li>
+          <li>Geen samenwerking</li>
+      </ul>
+        </h5>
+    </div>
+    <img style="height: 500px;" src="img/team_schup.jpg" alt="">
+  </div>
+</section>
+<section>
+  <h2>Complex Workflow</h2>
+  <img style="height: 700px;" src="img/complex_workflow.jpg" alt="">
 </section>
 <section>
   <h1>Continuous Integration</h1>
@@ -318,45 +268,22 @@ reveal:
     <div style="text-align: left; width: 70%">
       <h3>Met continuous integration </br>automatiseren we </h3>
       <ul>
-        <li>Build</li>
-        <li>Commits</li>
+        <li>Builds</li>
+        <li>Testing</li>
       </ul>
       <h3>Workflow</h3>
       <ul>
         <li>Code Schrijven</li>
+        <li>Code Commiten</li>
         <li>Code Builden</li>
         <li>Testen</li>
-        <li>Code Deployen</li>
       </ul>
     </div>
     <img style="height: 500px;" src="img/ci_loop.png" alt="">
   </div>
 </section>
 <section>
-  <h2>Continuous Integration: Onze Workflow</h2>
-  <div style="display: flex; align-items: center;">
-    <div style="text-align: left; width: 70%">
-      <ul>
-        <h5>
-          <li>Shared Resource</li>
-          <ul>
-            <li>Remote Server</li>
-            <li>Dropbox</li>
-          </ul>
-          <li>Rechstreekse integratie</li>
-          <li>Geen samenwerking</li>
-      </ul>
-        </h5>
-    </div>
-    <img style="height: 500px;" src="img/team_schup.jpg" alt="">
-  </div>
-</section>
-<section>
-  <h2>Continuous Integration: Complex Workflow</h2>
-  <img style="height: 700px;" src="img/complex_workflow.jpg" alt="">
-</section>
-<section>
-  <h1>Continuteit Garanderen / CI Voordelen</h1>
+  <h1>Continuteit Garanderen</h1>
   <div style="display: flex; justify-content: space-around">
     <ul>
       <h5>
@@ -374,7 +301,7 @@ reveal:
         <li>Variabelen blijven constant</li>
       </h5>
     </ul>
-    <img style="height: 700px;" src="img/ci_flow.png" alt="">
+    <img style="height: 300px;" src="img/ci_trust.png" alt="">
   </div>
   <blockquote><b>Code not tested is broken by design</b></br><em>- Jacob Kaplan Moss</em></blockquote>
 </section>
@@ -385,8 +312,8 @@ reveal:
       <li>Version Control</li>
       <li>Infrastructure</li>
       <li>Automated Builds</li>
+      <li>Automated Tests</li>
       <li>Team Coördinatie</li>
-      <li>Task Runner</li>
     </h5>
   </ul>
 </section>
@@ -488,44 +415,228 @@ reveal:
   </ul>
 </section>
 <section>
-  <h1>Classic IT Team</h1>
-  <div style="display: flex; align-items: center;">
-    <ul style="width: 70%">
-      <li>Teams</li>
-      <h5>
-        <ul>
-          <li>Developers</li>
-          <li>Testers</li>
-          <li>QA</li>
-          <li>Operators</li>
-        </ul>
-        <li>Handover van code</li>
-        <li>Doorschuiven van verantwoordelijkheid</li>
-      </h5>
-    </ul>
-    <img src="img/classic_it_team.png" alt="">
+  <h2>Round 2</h2>
+  <img src="img/round2.jpg" alt="">
+</section>
+<section>
+  <h1>Development Environments</h1>
+  <ul>
+    <li>We creëren meerdere omgevingen waarin onze applicatie kan draaien</li>
+    <li>Hierdoor creëren we geen single point of failure</li>
+    <li>Investering</li>
+  </ul>
+  </ul>
+</section>
+<section>
+  <h1>Development Environments</h1>
+  <div style="display: flex; flex-direction: column; height: 800px; justif-content: space-around;">
+    <div style="display: flex; justify-content: center;">
+      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+        <h4>Local Dev</h4>
+        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
+      </div>
+      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+        <h4>Testing</h4>
+        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
+      </div>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+        <h4>User Acceptance Testing</h4>
+        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
+      </div>
+      <div class="fragment" style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+        <h4>Production</h4>
+        <img style="max-height: 300px; width: auto;"src="img/env.png" alt="">
+      </div>
+    </div>
   </div>
 </section>
 <section>
-  <h1>DevOps IT Team</h1>
+  <h1>Local Dev</h1>
   <div style="display: flex; align-items: center;">
     <ul style="width: 70%">
       <h5>
-        <li>DevOps bouwt verder op </li>
+        <li>Machine van de developer</li>
+        <li>Mogelijkheden</li>
         <ul>
-          <li>Continuous Integration</li>
-          <li>Continuous Delivery</li>
-          <li>Continuous Deployment</li>
+          <li>Lokale server</li>
+          <li>Gevirtualiseerde server</li>
+          <li>Container</li>
         </ul>
-        <li>Voegt toe:</li>
+        <li>Nabootsen Productie environment</li>
         <ul>
-          <li>Collaboration</li>
-          <li>Automation</li>
-          <li>Monitoring</li>
+          <li>Geen productie database</li>
+          <li>Verschilt licht qua infrastructuur</li>
         </ul>
       </h5>
     </ul>
-    <img src="img/classic_it_team.png" alt="">
+    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
   </div>
 </section>
-
+<section>
+  <h1>Testing</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h5>
+        <li>Continuous Integration</li>
+        <ul>
+          <li>Combineren code verschillende devs</li>
+        </ul>
+        <li>Automatisatie taken</li>
+        <ul>
+          <li>Nightly Builds</li>
+          <li>Triggerd (Commits)</li>
+        </ul>
+        <li>Clean Environments</li>
+      </h5>
+    </ul>
+    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>UAT / Staging</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <ul>
+        <li>Exacte kloon productie</li>
+        <li>Finale Testing</li>
+        <li>Site voor QA Engineering</li>
+      </ul>
+    </ul>
+    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>Production Server</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h5>
+        <li>Laatste stable release</li>
+        <li>Verzamelen metrics</li>
+      </h5>
+    </ul>
+    <img class="plain" style="background: none; width: 25%; height: 400px;" src="img/env.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>Deployment Pipeline</h1>
+  <img style="height: 700px" src="img/cd_pipeline.png" alt="">
+</section>
+<section>
+  <h1>CD Good Practices</h1>
+  <ul>
+    <h5>
+      <li>Bouw je artifacts eenmaal</li>
+      <li>Deploy op voor alle environments op de zelfde manier</li>
+      <li>Smoke-Test je deployments</li>
+      <li>Deploy in een kloon van je productie omgeving</li>
+      <li>Elke test propageert door alle omgevingen</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h1>Bouw je artifacts eenmaal</h1>
+  <ul>
+    <h5>
+      <li>Artifacts: output van je build</li>
+      <li>Mogelijke problemen</li>
+      <ul>
+        <li>Geen snelle build</li>
+        <li>Introduceren van fouten</li>
+      </ul>
+      <li>Mogelijke counters</li>
+      <ul>
+        <li>Hashen van artifacts en vergelijken</li>
+        <li>Restricties op wie een build kan maken</li>
+      </ul>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+<h2>Deploy voor alle environments op de zelfde manier</h2>
+<ul>
+  <h5>
+    <li>Countering 'It works on my machine'</li>
+    <li>Deploying Frequency</li>
+    <ul>
+      <li>Deploy veel op een developer machine</li>
+      <li>Deploy sporadisch op productie</li>
+    </ul>
+    <li>Configuratie opties kunnen verschillen</li>
+    <li>Als het process verschilt dan ligt de fout bij:</li>
+    <ul>
+      <li>Configuratie optie</li>
+      <li>Infrastructuur (Dependency)</li>
+    </ul>
+  </h5>
+</ul>
+</section>
+<section style="text-align: left;">
+  <h1>Smoke-Test je deployments</h1>
+  <ul>
+    <h5>
+      <li>Runt je applicatie?</li>
+      <li>bv: cURL van je website</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h2>Deploy in een kloon van je productie omgeving</h2>
+  <ul>
+    <h5>
+      <li>Verschillende omgevingen, verschillende fouten</li>
+      <li>Wat moet het het zelfde zijn:</li>
+      <ul>
+        <li>Netwerk topologie en firewall configuratie</li>
+        <li>OS laag</li>
+        <li>Applicatie laag</li>
+        <li>Applicatie data</li>
+      </ul>
+      <li>Oplossing met snapshots en configuratie management software </li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h2>Elke test propageert door alle omgevingen</h2>
+  <div style="display: flex">
+    <ul style="width: 65%;">
+      <h5>
+        <li>Gebruik van alle resources</li>
+        <li>Manage de load</li>
+      </h5>
+    </ul>
+    <img src="img/cd_propagation.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>From Code to Production</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <li>Zeer intensief proces</li>
+      <li>Manueel is geen optie</li>
+      <ul>
+        <li>Fout gevoelig</li>
+        <li>Twee maal een manuele actie zal niet snel twee maal hetzelfde resultaat geven</li>
+      </ul>
+    </ul>
+    <img class="plain" style="background: none; height: 800px;" src="img/my_machine.jpg" alt="">
+  </div>
+</section>
+<section>
+  <h1>Checklist voor een release</h1>
+  <ul>
+    <h5>
+      <li>Hoe deploy ik mijn applicatie</li>
+      <li>Smoke test voor de applicatie</li>
+      <li>Wat doe ik als er een stap fout loopt in mijn release<>/li>
+      <li>Rollback plan</li>
+      <li>Upgrade applicatie zonder data te verliezen</li>
+      <li>Wat moet ik monitoren van mij applicatie</li>
+      <ul>
+        <li>Waar staan de logs</li>
+      </ul>
+      <li>Data backups</li>
+    </h5>
+  </ul>
+</section>
