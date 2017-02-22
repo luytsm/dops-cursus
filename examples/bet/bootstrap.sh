@@ -1,4 +1,5 @@
 #!/bin/bash
+apt-get update
 apt-get install git npm nodejs -y
 npm install pm2 -g
 ln -s /usr/bin/nodejs /usr/bin/node

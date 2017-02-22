@@ -282,10 +282,23 @@ reveal:
 <section>
   <h1>Automate what?</h1>
   <ul>
+    <li>Testen</li>
     <li>Integratie</li>
     <li>Delivery / Deployment</li>
     <li>Infrastructuur</li>
   </ul>
+</section>
+<section data-background-image="img/ci_loop.png" data-background-size="contain" data-background-color="#ffffff">
+  <h1 style="position: fixed; top: 0px; left: -150px; color: black;">Continuous integration</h1>
+</section>
+<section data-background-image="img/cdel_loop.png" data-background-size="contain" data-background-color="#ffffff">
+  <h1 style="position: fixed; bottom : 0px; left: -150px; color: black;">Continuous Delivery</h1>
+</section>
+<section data-background-image="img/cdep_loop.png" data-background-size="contain" data-background-color="#ffffff">
+  <h1 style="position: fixed; bottom: 0px; left: -150px; color: black;">Continuous Deployment</h1>
+</section>
+<section data-background-image="img/cd_pipeline.png" data-background-size="contain" data-background-color="#ffffff">
+  <h1 style="position: fixed; top: 450px; right: -2f20px; color: black; transform: rotate(90deg);">CD Pipeline</h1>
 </section>
 <section>
   <h1>Continuous Integration</h1>
@@ -308,9 +321,74 @@ reveal:
         <li>Build</li>
         <li>Commits</li>
       </ul>
+      <h3>Workflow</h3>
+      <ul>
+        <li>Code Schrijven</li>
+        <li>Code Builden</li>
+        <li>Testen</li>
+        <li>Code Deployen</li>
+      </ul>
     </div>
     <img style="height: 500px;" src="img/ci_loop.png" alt="">
   </div>
+</section>
+<section>
+  <h2>Continuous Integration: Onze Workflow</h2>
+  <div style="display: flex; align-items: center;">
+    <div style="text-align: left; width: 70%">
+      <ul>
+        <h5>
+          <li>Shared Resource</li>
+          <ul>
+            <li>Remote Server</li>
+            <li>Dropbox</li>
+          </ul>
+          <li>Rechstreekse integratie</li>
+          <li>Geen samenwerking</li>
+      </ul>
+        </h5>
+    </div>
+    <img style="height: 500px;" src="img/team_schup.jpg" alt="">
+  </div>
+</section>
+<section>
+  <h2>Continuous Integration: Complex Workflow</h2>
+  <img style="height: 700px;" src="img/complex_workflow.jpg" alt="">
+</section>
+<section>
+  <h1>Continuteit Garanderen / CI Voordelen</h1>
+  <div style="display: flex; justify-content: space-around">
+    <ul>
+      <h5>
+        <li>Bewijs dat je code werkt</li>
+        <ul>
+          <li>Sofware kan je builden</li>
+          <li>Unit Test</li>
+        </ul>
+        <li>Fout Detectie</li>
+        <ul>
+          <li>Sneller</li>
+          <li>Bij elke verandering</li>
+          <li>Kostreductie</li>
+        </ul>
+        <li>Variabelen blijven constant</li>
+      </h5>
+    </ul>
+    <img style="height: 700px;" src="img/ci_flow.png" alt="">
+  </div>
+  <blockquote><b>Code not tested is broken by design</b></br><em>- Jacob Kaplan Moss</em></blockquote>
+</section>
+<section>
+  <h1>CI Implementeren</h1>
+  <ul>
+    <h5>
+      <li>Version Control</li>
+      <li>Infrastructure</li>
+      <li>Automated Builds</li>
+      <li>Team Coördinatie</li>
+      <li>Task Runner</li>
+    </h5>
+  </ul>
 </section>
 <section style="text-align: left;">
   <h1>CI Good Practices</h1>
@@ -409,15 +487,6 @@ reveal:
     </h5>
   </ul>
 </section>
-
-<section data-background-image="img/ci_loop.png" data-background-size="contain" data-background-color="#ffffff">
-</section>
-<section data-background-image="img/cdel_loop.png" data-background-size="contain" data-background-color="#ffffff">
-</section>
-<section data-background-image="img/cdep_loop.png" data-background-size="contain" data-background-color="#ffffff">
-</section>
-<section data-background-image="img/cd_pipeline.png" data-background-size="contain" data-background-color="#ffffff">
-</section>
 <section>
   <h1>Classic IT Team</h1>
   <div style="display: flex; align-items: center;">
@@ -442,7 +511,7 @@ reveal:
   <div style="display: flex; align-items: center;">
     <ul style="width: 70%">
       <h5>
-      <li>DevOps bouwt verder op </li>
+        <li>DevOps bouwt verder op </li>
         <ul>
           <li>Continuous Integration</li>
           <li>Continuous Delivery</li>
