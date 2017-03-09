@@ -1,0 +1,380 @@
+---
+title: "Les 3: Version Control Software"
+description: "Het gebruiken van git en GitHub"
+reveal:
+---
+<section>
+  <h1>Version Control Software</h1>
+</section>
+<section style="text-align: left">
+  <h1>Een typisch voorbeeld</h1>
+  <ul>
+    <h5>
+      <li>Je programma werkt</li>
+      <li>Je maakt een aanpassing</li>
+      <li>Je breekt je programma</li>
+      <li>Je verwijderd de aanpassing</li>
+      <li>Je programma werkt nog steeds niet</li>
+      <li>Je moet inleveren binnen 5 minuten</li>
+    </h5>
+    <h3 class="fragment">Klinkt als muziek in de oren?</h3>
+  </ul>
+</section>
+<section style="text-align: left">
+  <h2>Software doorloopt verschillende fases</h2>
+  <ul>
+    <h5>
+      <li>Verschillende release</li>
+      <li>Variaties voor verschillende platformen</li>
+      <li>Verschillende versies in een development cyclus</li>
+      <ul>
+        <li>Test</li>
+        <li>Alpha</li>
+        <li>Beta</li>
+      </ul>
+      <li>Elke keer als je een file aanpast</li>
+      <li>Verschillende personen werken met een verschillende tempo aan een product</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left">
+  <h2>Hoe gaan we nu om met deze veranderingen?</h2>
+  <ul>
+    <li class="fragment">
+      <h5>Folder of file handmatig kopiëren</h5>
+      <pre style="width: 700px;"><code class="shell">
+├── gamedev
+├── gamedev_v1
+├── gamedev_v2
+├── gamedev_v3
+├── gamedev_v4
+└── gamedev_v5
+      </code></pre>
+    </li>
+    <h5>
+      <li class="fragment">Dropbox</li>
+      <li class="fragment">Facebook</li>
+      <li class="fragment">...</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left">
+  <h2>Is dit de correcte manier ?</h2>
+  <h2 class="fragment">Nee</h2>
+  </br>
+  </br>
+  </br>
+  <h2 class="fragment">Wat is dan de correcte manier?</h2>
+  <h2 class="fragment">Version Control</h2>
+</section>
+<section style="text-align: left">
+  <h1>Version Control Software</h1>
+  <blockquote style="text-align: center;">
+    <b style="margin: 10px;">
+      Version Control Software beheert alle verschillende versies van documenten, programma's, documenten, websites, ....
+    </b>
+  </blockquote>
+  <ul>
+    <h5>
+      <li>CVCS vs DVCS</li>
+      <li>Metadata</li>
+      <li>Welk software pakket</li>
+      <ul>
+        <li class="fragment">Git</li>
+      </ul>
+    </h5>
+  </ul>
+</section>
+<section>
+  <h1>CVCS vs DVCS</h1>
+  <div style="display: flex; justify-content: space-around;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h3>CVCS</h3>
+      <img src="img/cvcs.png" alt="">
+      <em>Centralized</em>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h3>DVCS</h3>
+      <img src="img/dvcs.png" alt="">
+      <em>Distributed</em>
+    </div>
+  </div>
+</section>
+<section style="text-align: left">
+  <h1>Metadata</h1>
+  <h5>VCS Doet veel meer dan het syncen van bestanden</h5>
+  <ul>
+    <h5>
+      <li>Het houdt de snapshots bij van de vorige versie</li>
+      <li>Vergelijken wat er verschillend is tov een ander versie</li>
+      <li>Oproepen van verschillende versie dmv een index</li>
+      <li>Verschillende software bieden extra statistieken</li>
+    </h5>
+  </ul>
+</section>
+<section>
+  <h1>Waarom Git ?</h1>
+  <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/925_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"/m/05vqwg","geo":"","time":"all"},{"keyword":"/m/012ct9","geo":"","time":"all"},{"keyword":"/m/08441_","geo":"","time":"all"},{"keyword":"/m/08w6d6","geo":"","time":"all"},{"keyword":"/m/09d6g","geo":"","time":"all"}],"category":0,"property":""}, {"exploreQuery":"date=all&q=%2Fm%2F05vqwg,%2Fm%2F012ct9,%2Fm%2F08441_,%2Fm%2F08w6d6,%2Fm%2F09d6g&hl=en-US","guestPath":"https://trends.google.com:443/trends/embed/"}); </script> 
+  <ul>
+    <h5>
+      <li>Git is de facto de standaard </li>
+      <li>GitHub</li>
+      <ul>
+        <li>GH Pages</li>
+        <li><a href="https://education.github.com/">GitHub Education</a></li>
+        <li>Github Classroom</li>
+        <li>Bachelorproef</li>
+      </ul>
+    </h5>
+  </ul>
+</section>
+<section data-background-image="img/repo_example.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section data-background-image="img/feedback.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section data-background-image="img/gitbook_example.png" data-background-size="contain" data-background-color="#FFFFFF"></section>
+<section style="text-align: left">
+  <h2>Is het overkill?</h2>
+  <h2 class="fragment">Nee</h2>
+  <ul>
+    <h5>
+      <li class="fragment">Als ontwikkelaar kom je zeker in contact met vcs</li>
+      <div class="fragment">
+        <li>Een mogelijke vraag op je sollicitatie</li>
+        <ul>
+          <li>Kan je met git werken?</li>
+        </ul>
+      </div>
+      <li class="fragment">Het is een verzekering</li>
+    </h5>
+  </ul>
+</section>
+<section>
+  <h1>Getting Started met Git</h1>
+</section>
+<section style="text-align: left">
+  <h2>Initiele Git Configuratie</h2>
+  <ul>
+    <li>
+      Identiteit instellen
+      <pre style="width: 1500px;"><code class="shell">
+ git config --global user.name "John Doe"
+ git config --global user.email johndoe@example.com
+      </code></pre>
+      <li>Aanpassen van editor </li>
+      <pre style="width: 1500px;"><code class="bash">
+git config --global core.editor 'c:/program files (x86)/brackets/brackets.exe'
+      </code></pre>
+
+    </li>
+  </ul>
+</section>
+<section style="text-align: left">
+  <h2>Een repo aanmaken</h2>
+  <ul>
+    <li>
+      Vanuit een bestaande map
+      <pre style="width: 1000px;"><code class="shell">
+cd /home/user/myprojdir
+git init
+git remote add &ltnaam_remote&gt &ltlink_naar_remote&gt
+# de remote toevoegen is optioneel, je kan ook lokaal werken
+      </code></pre>
+    </li>
+    <li>
+      Een bestaande repo gebruiken
+      <pre style="width: 1000px;"><code class="shell">
+git clone https://github.com/luytsm/mcu-cursus
+git clone git@github.com:luytsm/mcu-cursus.git
+# Je kan zowel een repo clonen over https als over ssh verbinding
+      </code></pre>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Toevoegen van bestanden</h1>
+  <h5>Verschillende stages van een file</h5>
+  <div style="display: flex; justify-content: space-around;">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h3>Staging Simple</h3>
+      <img class="plain" style="background: none;" src="img/git_staging_simple.jpg" alt="">
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h3>Staging</h3>
+      <img class="plain" style="background: none;" src="img/git_staging.png" alt="">
+    </div>
+  </div>
+</section>
+<section style="text-align: left">
+  <h1>Toevoegen van bestanden</h1>
+  <ul>
+    <li>Aanmaken van een README bestand</li>
+    <pre style="width: 1500px;"><code class="bash">
+echo 'My Project' &gt README
+git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Untracked files:
+  (use "git add &ltfile&gt..." to include in what will be commited)
+
+    README
+
+nothing added to commit but untracked files present (use "git add" to track)
+    </code></pre>
+    <li>Tracken van het README bestand</li>
+    <pre style="width: 1500px;"><code class="bash">
+git add README
+If you run your status command again, you can see that your README file is now tracked and staged to be committed:
+
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD &ltfile&gt..." to unstage)
+
+    new file:   README
+    </code></pre>
+  </ul>
+</section>
+<section style="text-align: left">
+  <h1>Toevoegen van bestanden</h1>
+  <ul>
+    <li>Commiten van het  README bestand</li>
+    <pre style="width: 1500px;"><code class="bash">
+git commit
+    </code></pre>
+    <li>Schrijven van commit message</li>
+    <ul>
+      <li>Kort commit bericht</li>
+      <li>Weergave van aanpassingen</li>
+      <li>Lang commit bericht</li>
+    </ul>
+    <pre style="width: 1500px;"><code class="bash">
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#   new file:   README
+~
+".git/COMMIT_EDITMSG" 9L, 283C
+    </code></pre>
+    <li>Aanpassen van editor </li>
+    <pre style="width: 1500px;"><code class="bash">
+git config --global core.editor 'c:/program files (x86)/brackets/brackets.exe'
+    </code></pre>
+  </ul>
+</section>
+<section style="text-align: left">
+  <h1>Verwijderen / verplaatsen van bestanden</h1>
+  <ul>
+    <li>Verwijderen van bestanden</li>
+    <pre style="width: 1500px;"><code class="bash">
+git rm README
+# Je moet deze verandering ook commiten
+    </code></pre>
+    <li>Verplaasten van bestanden</li>
+    <pre style="width: 1500px;"><code class="bash">
+mv README README.md
+git rm README
+git add README.md
+# de lange manier
+# Je moet deze verandering ook commiten
+    </code></pre>
+    <pre style="width: 1500px;"><code class="bash">
+git mv README README.md
+# de korte manier
+# Je moet deze verandering ook commiten
+    </code></pre>
+  </ul>
+</section>
+<section style="text-align: left">
+  <h1>Terugzetten van files</h1>
+  <ul>
+    <li>Commit aanpassen</li>
+    <pre style="width: 1500px;"><code class="bash">
+git commit -m 'initial commit'
+git add forgotten_file
+git commit --amend
+    </code></pre>
+    <li>Een item niet meer stagen</li>
+    <pre style="width: 1500px;"><code class="bash">
+# Een aanpassing die klaar staat om te commiten weghalen
+# Wijzigingen in de file blijven behouden
+git reset README.md
+    </code></pre>
+    <li>Een file wijzigen naar de vorige state</li>
+    <pre style="width: 1500px;"><code class="bash">
+# Een aangepaste file die terugzetten naar de laatst gecommite versie
+git checkout README.md
+    </code></pre>
+  </ul>
+</section>
+<section style="text-align: left">
+  <h1>Werken met remotes</h1>
+  <blockquote style="text-align:center">
+    <b>
+      Een remote is een van de peers die een kopie bevat van de repo
+    </b>
+  </blockquote>
+  <ul>
+    <li>Tonen remote van een kloon</li>
+    <pre style="width: 1500px;"><code class="bash">
+git clone https://github.com/luytsm/dops-cursus
+git remove -v
+
+#output
+origin  git@github.com:luytsm/dops-cursus.git (fetch)
+origin  git@github.com:luytsm/dops-cursus.git (fetch)
+    </code></pre>
+    <li>Changes ophalen van een remote</li>
+    <pre style="width: 1500px;"><code class="bash">
+git pull &ltremote_naam&gt &ltbranch_naam&gt
+    </code></pre>
+    <li>Changes verzenden naar een remote</li>
+    <pre style="width: 1500px;"><code class="bash">
+git push &ltremote_naam&gt &ltbranch_naam&gt
+    </code></pre>
+    <li>Standaard manier om met remotes te werken</li>
+    <pre style="width: 1500px;"><code class="bash">
+git commit
+git pull
+git push
+    </code></pre>
+    <ul>
+      <li>Lokaal alles committen</li>
+      <li>Alles ophallen</li>
+      <li>Eventueel mergen</li>
+      <li>Alles ophalen</li>
+    </ul>
+  </ul>
+</section>
+<section style="text-align: left">
+  <h1>Branches</h1>
+  <ul>
+    <li>Branch aanmaken</li>
+    <pre style="width: 1500px;"><code class="bash">
+git branch newbranch
+    </code></pre>
+    <li>Branch uitchecken</li>
+    <pre style="width: 1500px;"><code class="bash">
+git checkout newbranch
+    </code></pre>
+    <li>Oneliner</li>
+    <pre style="width: 1500px;"><code class="bash">
+git checkout -b newbranch
+    </code></pre>
+  </ul>
+</section>
+<section data-background-image="img/bs1.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section data-background-image="img/bs2.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section data-background-image="img/bs3.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section data-background-image="img/bs4.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section data-background-image="img/bs5.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section data-background-image="img/bs6.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section data-background-image="img/bs7.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section data-background-image="img/bs8.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section data-background-image="img/bs9.png" data-background-size="contain" data-background-color="#FAFAFA"></section>
+<section>
+  <h1>Nu is het aan jullie</h1>
+  <a href="http://learngitbranching.js.org/">Oefeningen</a>
+</section>
