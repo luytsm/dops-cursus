@@ -1,0 +1,629 @@
+---
+title: "Les 4: Vagrant"
+description: "Beheren van virtuele omgevingen met Vagrant"
+reveal:
+---
+<section>
+  <h1>Vagrant</h1>
+</section>
+<section>
+  <h2>Vagrant</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <ul>
+      <h5>
+        <li>Command line tool</li>
+        <li>Beheren van virtuele machines met</li>
+        <ul>
+          <li>VirtualBox</li>
+          <li>VMWare</li>
+          <li>AWS</li>
+        </ul>
+        <li>Integratie met configuratie mgmnt software</li>
+        <li>Voorziet baseboxes</li>
+      </h5>
+    </ul>
+    <img class="plain" style="background: none; height: 500px;" src="img/vagrant.png" alt="">
+  </div>
+</section>
+<section>
+  <h2>Waarom Vagrant?</h2>
+  <ul>
+    <li>Draagbare omgevingen</li>
+    <li>Dupliceren van omgevingen</li>
+    <li>Beheersbaarheid</li>
+    <li>Resistente servers</li>
+    <ul>
+      <li>Chaos Monkey</li>
+      <li>Phoenix Server</li>
+      <li>Immutable servers</li>
+    </ul>
+    <li>Kostperspectief</li>
+  </ul>
+  </br></br></br>
+  <h3 class="fragment">Code As Infrastructure</h3>
+</section>
+<section>
+  <h2>LAMP Opstelling</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <div>
+      <h5>LAMP Installer</h5>
+      <img style="height: 377px;" src="img/lamp_installer.png" alt="">
+    </div>
+    <div>
+      <h5>Gemanaged met Vagrant</h5>
+      <img src="img/lamp_vagrant.png" alt="">
+    </div>
+  </div>
+</section>
+<section>
+  <h2>Installeren</h2>
+  <ul>
+    <li>Vagrant</li>
+    <ul>
+      <li><a href="https://www.vagrantup.com/docs/installation/">https://www.vagrantup.com/docs/installation/</a></li>
+    </ul>
+    <li>Virtualbox</li>
+    <ul>
+      <li><a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></li>
+    </ul>
+  </ul>
+</section>
+<section>
+  <h2>Commandline</h2>
+  <pre ><code style="height: 100%;" class="bash">
+vagrant init ubuntu/xenial64 --minimal
+# initialiseer een Vagrantfile met als basebox ubuntu 16.10
+# de minimal tag zorgt er voor dat er geen commentaar in de
+# in de Vagrant file staat
+
+vagrant up 
+# start de virtuele omgeving gedefineerd in de vagrant file
+
+vagrant halt
+# stopt de virtuele omgeving
+
+vagrant suspend
+# slaagt de state van de machine up (hibernate)
+  </code></pre>
+</section>
+<section>
+  <h2>Commandline</h2>
+  <pre ><code style="height: 100%;" class="bash">
+vagrant status
+# status van de omgeving.
+vagrant reload
+# vagrant halt + up
+
+vagrant destroy
+# vernietig de virtuele omgeving
+
+vagrant ssh
+# zet een ssh verbinding op met de virtuele omgeving
+  </code></pre>
+</section>
+<section>
+  <h2>Vagrant file</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <ul>
+      <h5>
+        <li>Configuratiebestand</li>
+        <ul>
+          <li>Beschrijving van onze omgeving</li>
+        </ul>
+        <li>Gebaseerd op een basebox</li>
+      </h5>
+    </ul>
+    <pre><code>
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+end
+    </code></pre>
+  </div>
+</section>
+<section>
+  <h2>Full Vagrantfile</h2>
+  <pre><code>
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://atlas.hashicorp.com/search.
+  config.vm.box = "ubuntu/xenial64"
+
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  # config.vm.box_check_update = false
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing "localhost:8080" will access port 80 on the guest machine.
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  # config.vm.network "private_network", ip: "192.168.33.10"
+
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  # config.vm.network "public_network"
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  # config.vm.synced_folder "../data", "/vagrant_data"
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  # config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = "1024"
+  # end
+  #
+  # View the documentation for the provider you are using for more
+  # information on available options.
+
+  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
+  # such as FTP and Heroku are also available. See the documentation at
+  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
+  # config.push.define "atlas" do |push|
+  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
+  # end
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # config.vm.provision "shell", inline: <<-SHELL
+       #   apt-get update
+       #   apt-get install -y apache2
+       # SHELL
+       end
+       >>
+  </code></pre>
+</section>
+<section>
+  <h2>Baseboxes</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <ul>
+      <h5>
+        <li>Box = Een computersysteem</li>
+      </h5>
+      <h5>
+        <li>Een voorgedefineerd systeem</li>
+      </h5>
+      <h5>
+        <li>Niet gelimiteerd tot OS</li>
+      </h5>
+      <h5>
+        <li><a href="https://atlas.hashicorp.com/boxes/">https://atlas.hashicorp.com/boxes/</a></li>
+      </h5>
+      <h5>
+        <li>Startpunt ontwikkeling eigen systeem</li>
+      </h5>
+      <h5>
+        <li>Een kopie van de basebox word lokaal opgeslagen</li>
+      </h5>
+      <ul>
+        <pre><code>
+~/.vagrant.d/boxes/
+        </code></pre>
+      </ul>
+    </ul>
+    <img src="img/baseboxes.png" alt="">
+  </div>
+</section>
+<section>
+  <h2>Vagrant Machine Starten</h2>
+  <ul>
+    <h5><li>Starten van uit een project folder</li></h5>
+    <ul>
+      <li>Herhaling: je werkt vanuit een directory met commando's! </br>Hou rekening met een relatieve of absolute path namen</li>
+      <pre><code>
+mkdir my_env
+cd my_env
+      </code></pre>
+    </ul>
+    <h5><li>Initialiseren van Vagrantfile</li></h5>
+    <pre><code>
+vagrant init ubuntu/xenial64 --minimal
+    </code></pre>
+    <h5><li>Starten van de omgeving</li></h5>
+    <pre><code>
+vagrant up
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h2>Vagrant Up</h2>
+  <pre><code>
+vagrant up 
+  </code></pre>
+  <pre><code>
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'ubuntu/xenial64'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'ubuntu/xenial64' is up to date...
+==> default: A newer version of the box 'ubuntu/xenial64' is available! You currently
+==> default: have version '20170209.0.0'. The latest is version '20170311.0.0'. Run
+==> default: `vagrant box update` to update.
+==> default: Setting the name of the VM: tmp_default_1489617850343_2040
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: ubuntu
+    default: SSH auth method: password
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: The guest additions on this VM do not match the installed version of
+    default: VirtualBox! In most cases this is fine, but in rare cases it can
+    default: prevent things such as shared folders from working properly. If you see
+    default: shared folder errors, please make sure the guest additions within the
+    default: virtual machine match the version of VirtualBox you have installed on
+    default: your host and reload your VM.
+    default:
+    default: Guest Additions Version: 5.0.32
+    default: VirtualBox Version: 5.1
+==> default: Mounting shared folders...
+    default: /vagrant => /home/luytsm/tmp
+
+  </code></pre>
+</section>
+<section>
+  <h2>Done!</h2>
+  <ul>
+    <h5><li>Nazien van de state</li></li></h5>
+    <pre style="width: 1100px;"><code>
+vagrant status
+    </code></pre>
+    <pre style="width: 1100px;"><code>
+Current machine states:
+
+default                   running (virtualbox)
+
+The VM is running. To stop this VM, you can run `vagrant halt` to
+shut it down forcefully, or you can run `vagrant suspend` to simply
+suspend the virtual machine. In either case, to restart it again,
+simply run `vagrant up`.
+
+    </code></pre>
+    <h5><li>Verbinden met de box</li></h5>
+    <pre style="width: 1100px;"><code>
+vagrant ssh
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h2>Shared Folder</h2>
+  <ul>
+    <h5>
+      <li>Baseboxes zijn automatisch geconfigureerd met een shared folder</li>
+      <li>De folder op de host is de folder waarin de Vagrantfile staat</li>
+    </h5>
+    <pre><code>
+/home/luytsm/my_env
+├── some_other_config_file
+├── ubuntu-xenial-16.04-cloudimg-console.log
+└── Vagrantfile
+    </code></pre>
+    <h5>
+      <li>Op de virtuele machine is de folder:</li>
+    </h5>
+    <pre><code>
+/vagrant/
+├── some_other_config_file
+├── ubuntu-xenial-16.04-cloudimg-console.log
+└── Vagrantfile
+    </code></pre>
+    <h5>
+      <li>Eenvoudige manier om het delen van bestanden tussen de host en guest</li>
+    </h5>
+  </ul>
+</section>
+<section>
+  <h2>Netwerk Configuratie</h2>
+  <ul>
+    <h5>
+      <li>Port Forwarding</li>
+      <li>Default Network Interface</li>
+      <li>Public Networks</li>
+      <li>Private Networks</li>
+    </h5>
+  </ul>
+</section>
+<section>
+  <h2>Port Forwarding</h2>
+  <ul>
+    <h5>
+      <li>Toegang van  van de host naar Guest</li>
+    </h5>
+    <ul>
+      <li>Host is de omgeving waarop je virtualisatie draait.</li>
+      <li>Guest is de gevirtualiseerde omgeving</li>
+    </ul>
+    <pre style="width: 1100px;"><code>
+Vagrant.configure("2") do |config|
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+end
+    </code></pre>
+    <h5>
+      <li>Dit zorgt ervoor dat je makkelijk vanuit je eigen omgeving aan je webapplicatie kan</li>
+    </h5>
+  </ul>
+</section>
+
+<section>
+  <h2>Public Network</h2>
+  <ul>
+    <h5><li>Default geconfigureerde interface </li></h5>
+    <ul>
+      <li>vagrant ssh maakt hier gebruik van</li>
+    </ul>
+    <h5>
+      <li>Brigged Network m/ VBox</li>
+      <li>DHCP</li>
+    </h5>
+    <pre style="width: 1100px;"><code>
+Vagrant.configure("2") do |config|
+  config.vm.network "public_network"
+end
+    </code></pre>
+    <h5>
+      <li>Static IP</li>
+    </h5>
+    <pre style="width: 1100px;"><code>
+Vagrant.configure("2") do |config|
+  config.vm.network "public_network", ip: "192.168.0.17"
+end
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h2>Private Network</h2>
+  <ul>
+    <h5>
+      <li>Internal Network m/ VBox</li>
+      <li>DHCP</li>
+    </h5>
+    <pre style="width: 1100px;"><code>
+Vagrant.configure("2") do |config|
+  config.vm.network "private_network", type: "dhcp"
+end
+    </code></pre>
+    <h5><li>Static IP</li></h5>
+    <pre style="width: 1100px;"><code>
+Vagrant.configure("2") do |config|
+  config.vm.network "private_network", ip: "192.168.50.4"
+end
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h3>Provider</h3>
+  <blockquote>
+    Provider is de virtualisatie software waar rond Vagrant zich wrapt.
+  </blockquote>
+  <h3>Provisioning</h3>
+  <blockquote>
+    Provisioning is het proces dat Vagrant gebruikt voor het configureren van de omgeving naar de gewenste staat
+  </blockquote>
+  </ul>
+</section>
+<section>
+  <h2>Provisioning</h2>
+  <ul>
+    <h5>
+      <li>Shell</li>
+      <li>Ansible</li>
+      <li>Docker</li>
+    </h5>
+    <li>Chef</li>
+    <li>Puppet</li>
+    <li>Salt</li>
+    <li>...</li>
+  </ul>
+</section>
+<section>
+  <h2>Wanneer runt de provisioning?</h2>
+  <ul>
+    <h5><li>De eerste</li></h5>
+    <li><pre style="width: 1100px;"><code>
+vagrant up
+      </code></pre>
+      <h5><li>Daarna: </li></h5>
+      <li><pre style="width: 1100px;"><code>
+vagrant up --provision
+      </code></pre></li>
+      <li><pre style="width: 1100px;"><code>
+vagrant provision
+      </code></pre></li>
+      <li><pre style="width: 1100px;"><code>
+vagrant reload --provision
+      </code></pre></li>
+      <h5><li>Wanneer niet</li></h5>
+      <li><pre style="width: 1100px;"><code>
+# met volgende flag
+--no-provision
+        </code></pre>
+  </ul>
+</section>
+<section>
+  <h2>Shell Provisioning</h2>
+  <pre><code>
+#!/usr/bin/env bash
+
+# bootstrap.sh
+# basic installation script
+
+apt-get update
+apt-get install -y nginx git 
+  </code></pre>
+  <pre><code>
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.provision :shell, path: "bootstrap.sh"
+end
+  </code></pre>
+</section>
+<section>
+  <h2>Nadelen van Shell Provisioning</h2>
+  <ul>
+    <h5><li>Niet flexibel</li></h5>
+    <h5><li>Geen user interactie mogelijk</li></h5>
+    <h5><li>Niet schaalbaar</li></h5>
+    <ul>
+      <li>lange bash scripts zijn altijd leuk om te lezen</li>
+    </ul>
+    <h5><li>Geen idempotentie gegarandeerd</li></h5>
+    <h5><li>Opnieuw provisionen van een box duurt lang</li></h5>
+    <ul>
+      <pre><code>
+vagrant destroy
+vagrant up
+      </code></pre>
+    </ul>
+  </ul>
+</section>
+<section>
+  <h1>Idempotent</h1>
+  <blockquote>
+    </br>
+    denoting an element of a set which is unchanged in value when multiplied or otherwise operated on by itself.
+    </br>
+    </br>
+  </blockquote>
+  <div class="fragment">
+    <h5>Voorbeelden</h5>
+    <ul>
+      <pre style="width: 1100px;"><code>
+mkdir -r folder
+# wat als de folder al bestaat
+
+[ ! -f folder ]  && rm -r folder
+# eerst check uitvoeren
+      </code></pre>
+      <pre style="width: 1100px;"><code>
+git clone myrepo.git      
+# wat als de repo al gecloond is
+
+[ ! -f my repo ] && git clone myrepo.git      
+# eerst check uitvoeren
+      </code></pre>
+    </ul>
+  </div>
+</section>
+<section>
+  <h2>Putting it together</h2>
+  <ul>
+    <li>Gegeven is volgende project folder:</li>
+    <pre style="width: 1100px;"><code>
+basic
+├── bootstrap_dev.sh
+├── bootstrap_prod.sh
+├── bootstrap_uat.sh
+├── index_dev.html
+├── index_prod.html
+├── index_uat.html
+└── Vagrantfile
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h2>Putting it together</h2>
+  <h5>Vagrantfile</h5>
+  <pre style="width: 1500px;"><code>
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+    config.vm.define "dev" do |dev|
+        dev.vm.hostname = "dev.site"
+        dev.vm.network :private_network, ip: "192.168.16.10"
+        dev.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+        dev.vm.network :forwarded_port, guest: 22, host: 4444, auto_correct: true
+        dev.vm.network :forwarded_port, guest: 80, host: 8010, auto_correct: true
+        dev.vm.provision  "shell", path: "bootstrap_dev.sh"
+    end
+    config.vm.define "uat" do |uat|
+        uat.vm.hostname = "uat.site"
+        uat.vm.network :private_network, ip: "192.168.16.11"
+        uat.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+        uat.vm.network :forwarded_port, guest: 22, host: 5555, auto_correct: true
+        uat.vm.network :forwarded_port, guest: 80, host: 8011, auto_correct: true
+        uat.vm.provision  "shell", path: "bootstrap_uat.sh"
+    end
+    config.vm.define "prod" do |prod|
+        prod.vm.hostname = "prod.site"
+        prod.vm.network :private_network, ip: "192.168.16.12"
+        prod.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+        prod.vm.network :forwarded_port, guest: 22, host: 6666, auto_correct: true
+        prod.vm.network :forwarded_port, guest: 80, host: 8012, auto_correct: true
+        prod.vm.provision  "shell", path: "bootstrap_prod.sh"
+    end
+end
+  </code></pre>
+</section>
+<section>
+  <h2>Putting it together</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <div>
+      <pre style="width: 700px;"><code>
+#!/bin/bash
+apt-get update
+apt-get install -y nginx git
+
+rm /var/www/html/*
+cp /vagrant/index_uat.html /var/www/html/index.html
+      </code></pre>
+    </div>
+    <div>
+      <pre style="width: 700px;"><code class="html">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <h1>Development</h1>
+</body>
+</html>
+      </code></pre>
+    </div>
+  </div>
+</section>
+<section>
+  <h2>Putting it together</h2>
+  <h5>Verbinden met de machines</h5>
+  <pre><code>
+vagrant ssh dev
+  </code></pre>
+  <pre><code>
+vagrant ssh uat
+  </code></pre>
+  <pre><code>
+vagrant ssh prod
+  </code></pre>
+</section>
