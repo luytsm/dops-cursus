@@ -1,0 +1,31 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.define "mgr" do |mgr|
+    mgr.vm.hostname = "mgr.site"
+    mgr.vm.network :private_network, ip: "192.168.16.10"
+    mgr.vm.provision  "shell", path: "bootstrap.sh"
+
+  end
+config.vm.define "dev" do |dev|
+    dev.vm.hostname = "dev.site"
+    dev.vm.network :private_network, ip: "192.168.16.11"
+    dev.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+    dev.vm.network :forwarded_port, guest: 22, host: 6667, auto_correct: true
+    dev.vm.provision  "shell", path: "bootstrap.sh"
+  end
+config.vm.define "dev1" do |dev1|
+    dev1.vm.hostname = "dev1.site"
+    dev1.vm.network :private_network, ip: "192.168.16.12"
+    dev1.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+    dev1.vm.network :forwarded_port, guest: 22, host: 6666, auto_correct: true
+    dev1.vm.provision  "shell", path: "bootstrap.sh"
+  end
+
+  config.vm.define "prod" do |prod|
+    prod.vm.hostname = "prod.site"
+    prod.vm.network :private_network, ip: "192.168.16.13"
+    prod.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+    prod.vm.network :forwarded_port, guest: 22, host: 6668, auto_correct: true
+    prod.vm.provision  "shell", path: "bootstrap.sh"
+  end
+end

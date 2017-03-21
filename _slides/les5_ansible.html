@@ -1,0 +1,492 @@
+---
+title: "Les 5: Ansible"
+description: "De eerste stappen in het gebruik van configuratie management software"
+reveal:
+---
+<section>
+  <h1>Ansible</h1>
+</section>
+<section>
+  <h2>Configuratie Management Software</h2>
+  <ul>
+    <li class="fragment"><h5>Verderbouwen op Infrastructure as Code (IaC)</h5></li>
+    <li class="fragment"><h5>IT Automation Tools</h5></li>
+    <li class="fragment"><h5>Server Configuratiie</h5></li>
+    <li class="fragment"><h5>Orchestration</h5></li>
+  </ul>
+</section>
+<section>
+  <h2>Voordelen van Configuration Management Software</h2>
+  <ul>
+    <h5><li>Snel configureren van servers</li></h5>
+    <h5><li>Snelle recovery</li></h5>
+    <h5><li>Geen snowflake servers</li></h5>
+    <h5><li>Versie controle voor de server omgeving</li></h5>
+    <h5><li>Dupliceerbare omgevingen</li></h5>
+  </ul>
+</section>
+<aside class="notes">
+  https://www.digitalocean.com/community/tutorials/an-introduction-to-configuration-management
+</aside>
+<section>
+  <h2>Configuration Management Types</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <div>
+      <h3>Agent based</h3>
+      <img src="img/cm_with_agent.png" alt="">
+    </div>
+    <div>
+      <h3>Agentless</h3>
+      <img src="img/cm_agentless.png" alt="">
+    </div>
+  </div>
+</section>
+<section>
+  <h2>Welke spelers zijn er?</h2>
+  <ul>
+    <h5><li>Chef</li></h5>
+    <h5><li>Puppet</li></h5>
+    <h5><li>Saltstack</li></h5>
+    <h5><li>Ansible</li></h5>
+    <h5><li>....</li></h5>
+  </ul>
+</section>
+<section>
+  <h2>Installatie</h2>
+  <ul>
+    <li>Windows gebruikers</li>
+    <ul>
+      <li>Moet een work around gebruiken</li>
+    </ul>
+    <li>Linux/Mac</li>
+    <ul>
+      <li>Gebruik je package manager</li>
+    </ul>
+  </ul>
+</section>
+<section>
+  <h2>The work around</h2>
+  <ul>
+    <li>Ansible installeren op je virtueel machine</li>
+    <ul>
+      <li>Op een afzonderlijke box</li>
+      <li>Bij een van de servers</li>
+    </ul>
+  </ul>
+</section>
+<section>
+  <h2>Do The Workaround</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <div>
+      <h5>Vagrantfile</h5>
+      <pre style="width: 1000px;"><code>
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.define "mgr" do |mgr|
+    mgr.vm.hostname = "mgr.site"
+    mgr.vm.network :private_network, ip: "192.168.16.10"
+    mgr.vm.provision  "shell", path: "bootstrap.sh"
+
+  end
+  config.vm.define "prod" do |prod|
+    prod.vm.hostname = "prod.site"
+    prod.vm.network :private_network, ip: "192.168.16.12"
+    prod.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+    prod.vm.network :forwarded_port, guest: 22, host: 6666, auto_correct: true
+    prod.vm.provision  "shell", path: "bootstrap.sh"
+  end
+end
+      </code></pre>
+    </div>
+    <div>
+      <h5>Bootstrap file</h5>
+      <pre style="width: 800px;"><code>
+#!/bin/bash
+echo "ubuntu:ubuntu" | sudo chpasswd
+apt-get install ansible -y
+      </code></pre>
+    </div>
+  </div>
+</section>
+<section>
+  <h2>Do The Workaround</h2>
+  <ul>
+    <li>Run vorige Vagrant configuratie</li>
+    <li>Maak een SSH key aan op de mgr node</li>
+    <li>Doe een SSH Copy Id richting de production server</li>
+    <li>Maak een dev omgeving bij</li>
+    <ul>
+      <li>IP adres vrij te kiezen</li>
+      <li>Provisioning met bootstrap script</li>
+      <li>Run SSH Copy ID vanaf mgr</li>
+    </ul>
+  </ul>
+</section>
+<section>
+  <h2>Projectstructuur</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <div>
+      <h5>Zonder Vagrant</h5>
+      <pre style="width: 800px;"><code>
+basic-ansible/
+├── config.yml
+├── inventory
+│ ├── group_vars
+│ ├── host_vars
+│ └── hosts
+├── provision.yml
+└── site.yml
+      </code></pre>
+    </div>
+    <div>
+      <h5>Zonder Vagrant</h5>
+      <pre style="width: 800px;"><code>
+basic-ansible/
+├── Vagrantfile
+├── config.yml
+├── inventory
+│ ├── group_vars
+│ ├── host_vars
+│ └── hosts
+├── provision.yml
+└── site.yml
+      </code></pre>
+    </div>
+  </div>
+  <p>Voorbeeld projectstructuur, dit is de aangeraden vorm maar dit is vrij te keizen.</p>
+</section>
+<section>
+  <h2>Inventory File</h2>
+  <ul>
+    <li>Defineert het server park</li>
+    <li>INI formaat</li>
+    <pre><code>
+[myserver]
+17.233.85.9
+    </code></pre>
+    <li>Globale host file</li>
+    <pre><code>
+/etc/ansible/hosts
+    </code></pre>
+    <li>Hostfile meegeven als parameter</li>
+    <pre><code>
+ansible -i ~/my_hosts    
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h2>De hostfile voor onze omgeving</h2>
+  <pre><code>
+[mgr]
+192.168.16.10
+
+[prod]
+192.168.16.13
+  </code></pre>
+  <ul>
+    <li>Vervolledigt deze door het toevoegen van de dev omgeving</li>
+  </ul>
+</section>
+<section>
+  <h2>Ad-Hoc Commands</h2>
+  <ul>
+    <li>Het is mogelijk om een commando te runnen op een server in de inventory file</li>
+    <li>Antipatroon voor IaC</li>
+    <ul>
+      <li>Kan wel veilig gebruikt worden voor het opvragen van informatie</li>
+    </ul>
+    <li>Er zijn modules beschikbaar die je kan gebruiken</li>
+    <li>Het is ook mogelijk om een command te runnen</li>
+  </ul>
+</section>
+<section>
+  <h2>Running Ad-Hoc Commands</h2>
+  <pre><code>
+ubuntu@mgr:/vagrant$ ansible -i hosts -m ping -u ubuntu mgr                                        
+192.168.16.10 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+  </code></pre>
+  <h5>Try It!</h5>
+</section>
+<section>
+  <h2>Become</h2>
+  <ul>
+    <li>Commando uitvoeren met sudo</li>
+    <li>Wel oppassen bij oudere tutorials het gebruik van -S is deprecated</li>
+  </ul>
+  <pre><code>
+ubuntu@mgr:/vagrant$ ansible -i hosts -a "touch /etc/ansible" -u ubuntu mgr -b                     
+192.168.16.10 | SUCCESS | rc=0 >>
+
+
+ubuntu@mgr:/vagrant$ ansible -i hosts -a "touch /etc/ansible" -u ubuntu mgr 
+192.168.16.10 | FAILED | rc=1 >>
+touch: setting times of '/etc/ansible': Permission denied
+
+  </code></pre>
+</section>
+<section>
+  <h2>Ansible Modules</h2>
+  <ul>
+    <li>Verschillende modules beschikbaar zijn bruikbaar met adhoc</li>
+    <li>de apt module (apt-get)</li>
+    <pre><code>
+ubuntu@mgr:~$ ansible -i /vagrant/hosts dev -b -m apt -a 'pkg=git state=installed update_cache=true
+'
+192.168.16.11 | SUCCESS => {
+    "cache_update_time": 1490059192, 
+    "cache_updated": true, 
+    "changed": false
+}
+ubuntu@mgr:~$ ansible -i /vagrant/hosts dev -b -m apt -a 'pkg=git state=installed update_cache=true'
+192.168.16.11 | SUCCESS => {
+    "cache_update_time": 1490059199, 
+    "cache_updated": true, 
+    "changed": false
+}
+    </code></pre>
+    <li>Meer modules: <a href="http://docs.ansible.com/ansible/modules_by_category.html">Ansible Module Index</a></li>
+  </ul>
+</section>
+<section>
+  <h2>Idempotentie</h2>
+  <ul>
+    <li>Volgende stuk doet 2 maal hetzelfde</li>
+    <pre><code>
+sudo apt-get install git -y
+sudo apt-get install git -y
+    </code></pre>
+    <li>Volgende 2 commando's niet</li>
+    <pre><code>
+ubuntu@mgr:~$ ansible -i /vagrant/hosts dev -b -m apt -a 'pkg=git state=installed update_cache=true'
+192.168.16.11 | SUCCESS => {
+    "cache_update_time": 1490059192, 
+    "cache_updated": true, 
+    "changed": true
+}
+
+ubuntu@mgr:~$ ansible -i /vagrant/hosts dev -b -m apt -a 'pkg=git state=installed update_cache=true'
+192.168.16.11 | SUCCESS => {
+    "cache_update_time": 1490059199, 
+    "cache_updated": true, 
+    "changed": false
+}
+
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h2>Idempotentie</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <div>
+      <h5>Manual Install</h5>
+      <pre style="width: 600px;"><code>
+root@server:~# # Install the PGP key
+root@server:~# gpg --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
+root@server:~# gpg --armor --export 561F9B9CAC40B2F7 | sudo apt-key add -
+
+root@server:~# # Install https support for apt
+root@server:~# apt-get install apt-transport-https
+
+root@server:~# # Add the passenger apt repository
+root@server:~# vi /etc/apt/sources.list.d/passenger.list
+root@server:~# chown root: /etc/apt/sources.list.d/passenger.list
+root@server:~# chmod 600 /etc/apt/sources.list.d/passenger.list
+
+root@server:~# # Update the apt cache so we can use the new repo
+root@server:~# apt-get update
+
+root@server:~# # Install nginx
+root@server:~# apt-get install nginx-full passenger
+
+root@server:~# # Set up passenger in the nginx configuration
+root@server:~# vi /etc/nginx/nginx.conf
+
+root@server:~# # Start nginx
+root@server:~# service nginx restart
+      </code></pre>
+    </div>
+    <div>
+      <h5>Shell Script</h5>
+      <pre style="width: 600px;"><code>
+# Install the PGP key
+gpg --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
+gpg --armor --export 561F9B9CAC40B2F7 | apt-key add -
+
+# Install https support for apt
+apt-get install apt-transport-https -y
+
+# Add the passenger apt repository
+echo "deb https://oss-binaries.phusionpassenger.com/apt/passenger raring main" > /etc/apt/sources.list.d/passenger.list
+chown root: /etc/apt/sources.list.d/passenger.list
+chmod 600 /etc/apt/sources.list.d/passenger.list
+
+# Update the apt cache so we can use the new repo
+apt-get update
+
+# Install nginx
+apt-get install nginx-full passenger -y
+
+# Set up passenger in the nginx configuration
+sed -i "s/# passenger_root/passenger_root/" /etc/nginx/nginx.conf
+sed -i "s/# passenger_ruby/passenger_ruby/" /etc/nginx/nginx.conf
+
+# Start nginx
+service nginx restart
+      </code></pre>
+    </div>
+    <div>
+      <h5>Ansible</h5>
+      <pre style="width: 600px;"><code>
+---
+- hosts: all
+  tasks:
+
+  - name: Ensure the PGP key is installed
+    apt_key: >
+      state=present
+      id=AC40B2F7
+      url="http://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x561F9B9CAC40B2F7"
+
+  - name: Ensure https support for apt is installed
+    apt: >
+      state=present
+      pkg=apt-transport-https
+
+  - name: Ensure the passenger apt repository is added
+    apt_repository: >
+      state=present
+      repo='deb https://oss-binaries.phusionpassenger.com/apt/passenger raring main'
+
+  - name: Ensure nginx is installed
+    apt: >
+      state=present
+      pkg=nginx-full
+
+  - name: Ensure passenger is installed
+    apt: >
+      state=present
+      pkg=passenger
+      update_cache=yes
+
+  - name: Ensure the nginx configuration file is set
+    copy: >
+      src=/app/config/nginx.conf
+      dest=/etc/nginx/nginx.conf
+
+  - name: Ensure nginx is running
+    service: >
+      name=nginx
+      state=started
+      </code></pre>
+    </div>
+  </div>
+  <aside class="notes">
+https://valdhaus.co/writings/ansible-vs-shell-scripts//aside>
+  </aside>
+</section>
+<section>
+  <h2>Het opzetten van een simplistische omgeving</h2>
+  <ul>
+    <li>Dupliceer de dev omgeving zodat we er tegelijk aan het runnen zijn</li>
+    <pre><code>
+config.vm.define "dev" do |dev|
+    dev.vm.hostname = "dev.site"
+    dev.vm.network :private_network, ip: "192.168.16.11"
+    dev.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+    dev.vm.network :forwarded_port, guest: 22, host: 6667, auto_correct: true
+    dev.vm.provision  "shell", path: "bootstrap.sh"
+  end
+config.vm.define "dev1" do |dev1|
+    dev1.vm.hostname = "dev1.site"
+    dev1.vm.network :private_network, ip: "192.168.16.12"
+    dev1.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+    dev1.vm.network :forwarded_port, guest: 22, host: 6666, auto_correct: true
+    dev1.vm.provision  "shell", path: "bootstrap.sh"
+  end
+    </code></pre>
+    <li>Dit is een voorbeeld, maak de nodige aanpassing voor in jouw omgeving</li>
+  </ul>
+</section>
+<section>
+  <h2>Een aangepaste hostfile</h2>
+  <ul>
+    <li>Het is mogelijk om groepen te maken in de hostfile</li>
+    <pre><code>
+[app]
+192.168.60.4
+192.168.60.5
+
+[db]
+192.168.60.6
+
+[multi:children]
+app
+db
+    </code></pre>
+    <li>Pas je hostfile aan de groeps devs aan te maken. Deze bestaat uit</li>
+    <ul>
+      <li>dev</li>
+      <li>dev1</li>
+    </ul>
+  </ul>
+</section>
+<section>
+  <h2>Een aangepaste hostfile</h2>
+  <ul>
+    <li>Nu kunnen we het volgende commando uitvoeren</li>
+    <pre><code>
+ubuntu@mgr:~$ ansible -i /vagrant/hosts devs -m ping
+192.168.16.11 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+192.168.16.12 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+    </code></pre>
+    <li>Je kan ook alle hosts bereiken</li>
+    <pre><code>
+ubuntu@mgr:~$ ansible -i /vagrant/hosts all -m ping
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h2>Ansible Playbook</h2>
+  <ul>
+    <li>Je kan ook een bepaalde handeling definiëren in een playbook</li>
+    <li>Sequentie beschrijven van modules</li>
+    <li>Definitie gebeurt in YAML</li>
+    <pre><code>
+- hosts: all
+  become: true
+  tasks:
+    - name: Install nginx
+      apt: name={{ item }} state=present
+      with_items:
+      - nginx
+    </code></pre>
+    <li>Oproepen van een playbook</li>
+    <pre><code>
+ubuntu@mgr:/vagrant$ ansible-playbook -i hosts web.yml
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h2>Oefening</h2>
+  <ul>
+    <li>Maak de vorige playbook af door een softlink te legggen van je nginx config in je shared folder op je vagrant box</li>
+    <ul>
+      <li><a href="http://docs.ansible.com/ansible/file_module.html">Ansible File Module</a></li>
+    </ul>
+    <li>Maak 2 simpele playbooks waarbij je tussen 2 branches wisselt van een repo door gebruik te maken van de Git module </li>
+    <ul>
+      <li><a href="https://github.com/AP-Elektronica-ICT/do_rollback_website">De te gebruiken repo</a></li>
+      <li><a href="http://docs.ansible.com/ansible/git_module.html">Git Module</a></li>
+    </ul>
+  </ul>
+</section>
+
