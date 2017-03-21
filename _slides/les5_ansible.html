@@ -213,7 +213,7 @@ ubuntu@mgr:/vagrant$ ansible -i hosts -m ping -u ubuntu mgr
 <section>
   <h2>Become</h2>
   <ul>
-    <li>Commando uitvoeren met sudo</li>
+    <li>Commando uitvoeren met privileges</li>
     <li>Wel oppassen bij oudere tutorials het gebruik van -S is deprecated</li>
   </ul>
   <pre><code>
@@ -390,7 +390,7 @@ https://valdhaus.co/writings/ansible-vs-shell-scripts//aside>
 <section>
   <h2>Het opzetten van een simplistische omgeving</h2>
   <ul>
-    <li>Dupliceer de dev omgeving zodat we er tegelijk aan het runnen zijn</li>
+    <li>Dupliceer de dev omgeving zodat we er 2 tegelijk aan het runnen zijn</li>
     <pre><code>
 config.vm.define "dev" do |dev|
     dev.vm.hostname = "dev.site"
@@ -413,7 +413,7 @@ config.vm.define "dev1" do |dev1|
 <section>
   <h2>Een aangepaste hostfile</h2>
   <ul>
-    <li>Het is mogelijk om groepen te maken in de hostfile</li>
+    <li>Het is mogelijk om groepen aan te maken in de hostfile</li>
     <pre><code>
 [app]
 192.168.60.4
@@ -426,7 +426,7 @@ config.vm.define "dev1" do |dev1|
 app
 db
     </code></pre>
-    <li>Pas je hostfile aan de groeps devs aan te maken. Deze bestaat uit</li>
+    <li>Pas je hostfile aan door de groeps devs aan te maken. Deze bestaat uit</li>
     <ul>
       <li>dev</li>
       <li>dev1</li>
@@ -465,7 +465,7 @@ ubuntu@mgr:~$ ansible -i /vagrant/hosts all -m ping
   become: true
   tasks:
     - name: Install nginx.
-      apt: name={{ item }} state=present
+      apt: name={{ "{{ items " }}}}"}}"}} state=present
       with_items:
       - nginx
     </code></pre>
@@ -478,11 +478,11 @@ ubuntu@mgr:/vagrant$ ansible-playbook -i hosts web.yml
 <section>
   <h2>Oefening</h2>
   <ul>
-    <li>Maak de vorige playbook af door een softlink te legggen van je nginx config in je shared folder op je vagrant box</li>
+    <li>Maak de vorige playbook af door een softlink te legggen van je nginx site config in je shared folder naar de correcte locatie voor nginx.</li>
     <ul>
       <li><a href="http://docs.ansible.com/ansible/file_module.html">Ansible File Module</a></li>
     </ul>
-    <li>Maak 2 simpele playbooks waarbij je tussen 2 branches wisselt van een repo door gebruik te maken van de Git module </li>
+    <li>Maak 2 simpele playbooks waarbij je tussen 2 branches wisselt van een repo, door gebruik te maken van de git module </li>
     <ul>
       <li><a href="https://github.com/AP-Elektronica-ICT/do_rollback_website">De te gebruiken repo</a></li>
       <li><a href="http://docs.ansible.com/ansible/git_module.html">Git Module</a></li>
