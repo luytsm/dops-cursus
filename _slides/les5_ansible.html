@@ -464,7 +464,7 @@ ubuntu@mgr:~$ ansible -i /vagrant/hosts all -m ping
 - hosts: all
   become: true
   tasks:
-    - name: Install nginx
+    - name: Install nginx.
       apt: name={{ item }} state=present
       with_items:
       - nginx
