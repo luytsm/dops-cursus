@@ -54,7 +54,9 @@ dops_basic_infrastructure
 
 ### Requirements
 * Toon aan dat alle servers worden opgestart 
-* Installeer en configureer de applicaties met Ansible
+* Installeer alle applicaties met behulp van Ansible
+ * Schrijf een playbook voor elke file
+ * Houd de config files bij en kopieer deze vanuit de shared folder
 * Toon aan de servers niet van overal beschikbaar zijn.
 * Limiteer de resources van de server (memory = 512MB, cpu =1)
 * Zet het project onder versie controle
