@@ -5,3 +5,8 @@
       apt: name={{ item }} state=present
       with_items:
       - nginx
+
+    - name: Clean artifact path
+      file:
+        state: absent
+        path: /var/www/html
