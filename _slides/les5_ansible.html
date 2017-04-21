@@ -696,6 +696,29 @@ apt-get install ansible sshpass -y
   </div>
 </section>
 <section>
+  <h2>Hostfiles</h2>
+  <pre><code>
+[mgr]
+192.168.16.10
+
+[lb]
+192.168.16.11
+
+[db]
+192.168.16.12
+
+[web1]
+192.168.16.21
+
+[web2]
+192.168.16.22
+
+[web:children]
+web1
+web2
+  </code></pre>
+</section>
+<section>
   <h2>Group Vars</h2>
   <div style="display: flex; justify-content: space-around;">
     <ul>
