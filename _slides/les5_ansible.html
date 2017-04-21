@@ -490,6 +490,20 @@ ubuntu@mgr:/vagrant$ ansible-playbook -i hosts web.yml
   </ul>
 </section>
 <section>
+  <h2>Oefeningen</h2>
+  <pre><code>
+- hosts: dev
+  become: true
+  tasks:
+    - name: Install nginx.
+      git:
+        repo: "https://github.com/AP-Elektronica-ICT/do_rollback_website"
+        dest: /var/www/html
+        version: stable
+        force: yes
+  </code></pre>
+</section>
+<section>
   <h2>Vagrant Extended</h2>
   <ul>
     <li>Group Variables</li>
@@ -564,7 +578,16 @@ extended-ansible
       <li>Notify taken</li>
       <li>Taken worden maar eenmalig gerunt per notify, ook als deze meerdere keren word gecalled </li>
     </ul>
-    <li></li>
+    <li>Tasks</li>
+    <ul>
+      <li>Algemene taken</li>
+      <li>Verplicht</li>
+    </ul>
+    <li>Templates</li>
+    <ul>
+      <li>Jinja 2 templating engine</li>
+      <li>Variabelle paginas of config files</li>
+    </ul>
   </ul>
   </div>
 </section>
@@ -591,5 +614,154 @@ extended-ansible
     </ul>
   </div>
   <a href="http://docs.ansible.com/ansible/playbooks_roles.html#roles">Officiële Documentatie</a>
+</section>
+<section>
+  <h2>Templates</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <ul>
+      <li>Jinja 2 templating enginge</li>
+      <li>moustache syntax</li>
+      <li>
+        { { ansible_hostname } } ({ { ansible_enp0s8.ipv4.address } })
+      </li>
+    </ul>
+    <img src="img/jinja-logo.png" alt="">
+  </div>
+</section>
+<section>
+  <h2>Extended Ansible in de Praktijk</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <ul>
+      <li>Vagrant omgeving opzetten</li>
+      <li>Group variabelen zetten voor SSH</li>
+      <li>Roles aanmaken</li>
+      <li>Templates voorzien</li>
+    </ul>
+  </div>
+</section>
+<section>
+  <h2>Extended Ansible in de Praktijk</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <ul>
+      <li>Maak een project folder aan en maak gebruik van volgende Vangrantfile</li>
+      <li>Voeg ook de bootstrap.sh toe</li>
+    </ul>
+    <div>
+      <pre><code>
+Vagrant.configure("2") do |config|
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 384
+    v.cpus = 1
+  end
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.define "mgr" do |mgr|
+    mgr.vm.hostname = "mgr.site"
+    mgr.vm.network :private_network, ip: "192.168.16.10"
+    mgr.vm.provision  "shell", path: "bootstrap.sh"
+  end
+
+ config.vm.define "lb" do |lb|
+    lb.vm.hostname = "lb.site"
+    lb.vm.network :private_network, ip: "192.168.16.11"
+    lb.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+    lb.vm.network :forwarded_port, guest: 22, host: 6668, auto_correct: true
+    lb.vm.provision  "shell", path: "bootstrap.sh"
+  end
+
+  config.vm.define "db" do |db|
+    db.vm.hostname = "db.site"
+    db.vm.network :private_network, ip: "192.168.16.12"
+    db.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", disabled: true
+    db.vm.network :forwarded_port, guest: 22, host: 6668, auto_correct: true
+    db.vm.provision  "shell", path: "bootstrap.sh"
+  end
+
+  config.vm.box = "ubuntu/xenial64"
+  (1..2).each do |i|
+    config.vm.define "web#{i}" do |node|
+      node.vm.hostname = "web#{i}.site"
+      node.vm.network "private_network", ip: "192.168.16.#{20+i}"
+      node.vm.network "forwarded_port", guest: 80, host: "#{8000+i}"
+      node.vm.provision  "shell", path: "bootstrap.sh"
+    end
+  end
+end
+      </code></pre>
+      <pre><code>
+#!/bin/bash
+echo "ubuntu:ubuntu" | sudo chpasswd
+apt-get install ansible sshpass -y
+      </code></pre>
+      </div>
+  </div>
+</section>
+<section>
+  <h2>Group Vars</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <ul>
+      <li>Ansible SSH paswoorden laten gebruiken ipv Keys</li>
+      <li>Niet veilig!!!</li>
+      <li>Je kan ook een vaste key instellen</li>
+      <li><a href="http://docs.ansible.com/ansible/intro_inventory.html#list-of-behavioral-inventory-parameters">Parameters</a></li>
+      <li>Voeg toe aan je project folder</li>
+    </ul>
+    <pre class="fragment"><code>
+ansible_user: ubuntu
+ansible_ssh_pass: ubuntu
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    </code></pre>
+  </div>
+</section>
+<section>
+  <h2>Roles</h2>
+  <div style="display: flex; justify-content: space-around;">
+    <ul>
+      <li>Herbruikbare playbooks</li>
+      <li>Zeer configureerbaar</li>
+      <ul>
+        <li>files</li>
+        <li>Templates</li>
+      </ul>
+      <li>Role word vanuit een playbook opgeroepen</li>
+      <li>Plaats de gegeven files in de juist locatie</li>
+    </ul>
+    <div>
+    <pre><code>
+---
+- name: Install nginx.
+  apt: name={{ item }} state=present
+  with_items:
+    - nginx
+
+- name: deploy website content
+  template: src=index.html.j2 dest=/var/www/html/index.html
+    </code></pre>
+    <pre><code>
+- hosts: web
+  become: true
+  roles:
+    - common
+    - web
+    </code></pre>
+    </div>
+  </div>
+</section>
+<section>
+  <h2>Templates</h2>
+  <ul>
+    <li>Toetevoegen in de rol</li>
+    <li>Call vanuit de task</li>
+  </ul>
+</section>
+<section>
+  <h2>Opdracht</h2>
+  <ul>
+    <li>Maak een rol voor een loadbalancer en  een DB</li>
+    <ul>
+      <li>Installeer de software</li>
+      <li>Kopieer de config files van uit de roles directory</li>
+      <li>Gebruik van templates mag ook<:/li>
+    </ul>
+  </ul>
 </section>
 
