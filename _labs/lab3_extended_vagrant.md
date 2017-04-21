@@ -30,6 +30,28 @@ Beschrijf deze omgeving door gebruik te maken van Vagrant. Leg vooral de focus
 op het beschrijven van de machines en opzetten van de netwerken. Zorg er ook
 voor de dat de basis applicaties er op staan.
 
+## Projectstructuur 
+Gebruik volgende map structuur als basis voor het opbouwen van het labo
+
+```
+dops_basic_infrastructure
+├── backend_app
+│   └── README.md
+├── cfg
+│   ├── backend_conf
+│   ├── db_conf
+│   ├── frontend_conf
+│   └── lb_conf
+├── frontend_app
+│   └── README.md
+├── playbooks
+│   ├── backend.yml
+│   ├── db.yml
+│   ├── frontend.yml
+│   └── lb.yml
+└── Vagrantfile
+```
+
 ### Requirements
 * Toon aan dat alle servers worden opgestart 
 * Installeer alle applicaties met behulp van Ansible
@@ -40,3 +62,6 @@ voor de dat de basis applicaties er op staan.
 * Zet het project onder versie controle
   * Ontwikkel dit labo onder de branch `infra/alpha`
 
+### Extra Informatie
+Zie ook deze video tutorial voor meer informatie
+[Sysadmin Cast Ep. #43](https://sysadmincasts.com/episodes/43-19-minutes-with-ansible-part-1-4)
