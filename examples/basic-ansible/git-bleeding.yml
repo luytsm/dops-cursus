@@ -1,0 +1,9 @@
+- hosts: dev
+  become: true
+  tasks:
+    - name: Install nginx.
+      git:
+        repo: "https://github.com/AP-Elektronica-ICT/do_rollback_website"
+        dest: /var/www/html
+        version: bleeding
+        force: yes
