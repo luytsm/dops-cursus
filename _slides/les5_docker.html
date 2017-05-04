@@ -1,0 +1,537 @@
+---
+title: "Les 6: Docker"
+description: "Gebruik maken van containers voor het deployen van applicaties"
+reveal: 
+---
+<section>
+  <h1>Docker</h1>
+</section>
+<section>
+  <h2 class="fragment">Dev</h2>
+  <h2>Ops</h2>
+  <ul>
+    <li>Infrastructure as Code</li>
+    <li>Opzetten van omgevingen</li>
+    <li>Geen focus op het ontwikkelen van applicaties</li>
+  </ul>
+</section>
+<section>
+  <h3>What is Docker (v1.11)</h3>
+  <blockquote>
+    <p>Docker is an open platform for developing, shipping, and running applications.</p>
+    <p>Docker allows you to package an application with all of its dependencies into a standardized unit for software development.</p>
+  </blockquote>
+</section>
+<section>
+  <h3>Docker vs VMs</h3>
+  <div style="display: flex; justify-content: space-around;">
+    <img src="./img/docker_vm_diagram.png" alt="">
+    <img src="./img/docker_container_diagram.png" alt="">
+  </div>
+
+</section>
+<section>
+  <h3>Docker History</h3>
+  <ul>
+    <li>Solomon Hykes (<a href="https://twitter.com/solomonstre">@solomonstre</a>)</li>
+    <li>dotCloud (now Docker Inc)</li>
+    <li>March 2013</li>
+    <li>Apache 2.0 license</li>
+    <li>30k stars on Github</li>
+    <li>260k public repositories on hub.docker.com</li>
+    <li>Docker Inc acquires everyone <small><sup>TM</sup></small></li>
+    <li>Docker joins the "<a href="https://www.opencontainers.org/">Open Container Initiative</a>", June 2015</li>
+  </ul>
+</section>
+<section>
+  <h3>Docker Benifits</h3>
+  <ul>
+    <li>Fast (deployment, migration, restarts)</li>
+    <li>Secure</li>
+    <li>Lightweight (save disk &amp; CPU)</li>
+    <li>Open Source</li>
+    <li>Portable software</li>
+    <li>Microservices and integrations (APIs)</li>
+    <li>Simplify DevOps</li>
+    <li>Version control capabilities</li>
+  </ul>
+</section>
+<section>
+  <h3>Common Docker usages</h3>
+  <ul>
+    <li>Sandbox environment (develop, test, debug, educate)</li>
+    <li>Continuous Integration &amp; Deployment</li>
+    <li>Scaling apps</li>
+    <li>Development collaboration</li>
+    <li>Infrastructure configuration</li>
+    <li>Local development</li>
+    <li>Multi-tier applications</li>
+    <li>PaaS, SaaS</li>
+  </ul>
+  <h6>See the <a href="https://www.docker.com/survey-2016">survey results for 2016</a></h6>
+</section>
+<section>
+  <h3>The Docker architecture</h3>
+  <p><img class="plain" style="background: none;" src="https://docs.docker.com/engine/article-img/architecture.svg" alt="Docker architecture"></p>
+  <h6>See more at <a href="https://docs.docker.com/engine/understanding-docker/">Understanding docker</a></h6>
+</section>
+<section>
+  <h3>Docker components</h3>
+  <ul>
+    <li>(Docker) client</li>
+    <li>daemon</li>
+    <li>engine</li>
+    <li>machine</li>
+    <li>compose</li>
+    <li>swarm</li>
+    <li>registry</li>
+  </ul>
+</section>
+<section>
+  <h3>Docker client</h3>
+  <p>It is the primary user interface to Docker. It accepts commands from the user
+  and communicates back and forth with a Docker daemon.</p>
+</section>
+<section>
+  <h3>Docker daemon</h3>
+  <p>It runs on a host machine. The user does not directly interact with the daemon,
+  but instead through the Docker client with the RESTful api or sockets.</p>
+</section>
+<section>
+  <h3>Docker engine</h3>
+  <p>A Client with a Daemon as also as the docker-compose tool. Usually referred simply as "docker".</p>
+</section>
+<section>
+  <h3>Docker machine</h3>
+  <p><img src="https://raw.githubusercontent.com/theodorosploumis/docker-presentation/gh-pages/img/docker_machine.png" alt="Docker machine logo"></p>
+  <p>A tool which makes it really easy to create Docker hosts on your computer,
+  on cloud providers and inside your own data center.
+  It creates servers, installs Docker on them, then configures the Docker client to talk to them.
+  Required for Mac, Windows users.</p>
+</section>
+<section>
+  <h3>Docker compose</h3>
+  <p><img src="https://raw.githubusercontent.com/theodorosploumis/docker-presentation/gh-pages/img/docker_compose.png" alt="Docker compose logo"></p>
+  <p>A tool for defining and running complex applications with Docker
+  (eg a multi-container application) with a single file.</p>
+</section>
+<section>
+  <h3>Docker swarm</h3>
+  <p><img src="https://raw.githubusercontent.com/theodorosploumis/docker-presentation/gh-pages/img/docker_swarm.png" alt="Docker swarm logo"></p>
+  <p>A native clustering tool for Docker. Swarm pools together several Docker
+  hosts and exposes them as a single virtual Docker host. It scale up to multiple hosts.</p>
+</section>
+<section>
+  <h3>Docker distribution</h3>
+  <p><img src="https://raw.githubusercontent.com/theodorosploumis/docker-presentation/gh-pages/img/docker_distribution.png" alt="Docker distribution logo"></p>
+  <p>A (hosted) service containing repositories of images which responds to the Registry API.</p>
+</section>
+<section>
+  <h3>Steps of a Docker workflow</h3>
+  <pre><code>docker run -i -t -d ubuntu:15.04 /bin/bash</code></pre>
+  <ul>
+    <li>Pulls the ubuntu:15.04 <a href="https://docs.docker.com/engine/userguide/containers/dockerimages/" title="A read-only layer that is the base of your container. It can have a parent image to abstract away the more basic filesystem snapshot.">image</a> from the <a href="https://docs.docker.com/registry/" title="The central place where all publicly published images live. You can search it, upload your images there and when you pull a docker image, it comes the repository/hub.">registry</a></li>
+    <li>Creates a new <a href="https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/" title="A runnable instance of the image, basically it is a process isolated by docker that runs on top of the filesystem that an image provides.">container</a></li>
+    <li>Allocates a filesystem and mounts a read-write <a href="https://docs.docker.com/engine/reference/glossary/#filesystem" title="A set of read-only files to provision the system. Think of a layer as a read only snapshot of the filesystem.">layer</a></li>
+    <li>Allocates a <a href="https://www.wikiwand.com/en/Bridging_%28networking%29">network/bridge interface</a></li>
+    <li>Sets up an <a href="https://www.wikiwand.com/en/IP_address" title="An Internet Protocol address (IP address) is a numerical label assigned to each device (e.g., computer, printer) participating in a computer network that uses the Internet Protocol for communication.">IP address</a></li>
+    <li>Executes a process that you specify (<code>/bin/bash</code>)</li>
+    <li>Captures and provides application output</li>
+  </ul>
+</section>
+<section>
+  <h3>The docker image</h3>
+  <div style="display: flex; justify-content: space-around;">
+    <ul>
+      <li>Docker Image</li>
+      <ul>
+        <li>Prebuilt/Shipped applicatie</li>
+        <li>Image = Stopped container</li>
+      </ul>
+      <li>Image bestaat uit meerdere lagen</li>
+      <ul>
+        <li>Nodige dependencies opgedeeld</li>
+      </ul>
+    </ul>
+    <p><img src="https://docs.docker.com/engine/userguide/storagedriver/images/image-layers.jpg" alt="ubuntu:15.04 image" title="A read-only layer that is the base of your container. It can have a parent image to abstract away the more basic filesystem snapshot. Each Docker image references a list of read-only layers that represent filesystem differences. Layers are stacked on top of each other to form a base for a containerâs root filesystem."></p>
+  </div>
+</section>
+<section>
+  <h3>The docker container</h3>
+  <div style="display: flex; justify-content: space-around;">
+    <ul>
+      <li>Docker Container</li>
+      <ul>
+        <li>Image</li>
+        <li>R/W layer</li>
+      </ul>
+      <li>Container = Running image</li>
+    </ul>
+    <p><img src="https://docs.docker.com/engine/userguide/storagedriver/images/container-layers.jpg" alt="container using ubuntu:15.04 image" title="A runnable instance of the image, basically it is a process isolated by docker that runs on top of the filesystem that an image provides. For each containers there is a new, thin, writable layer - container layer - on top of the underlying stack (image)."></p>
+  </div>
+</section>
+<section>
+  <h2>Docker Installatie</h2>
+  <ul>
+    <li>Windows</li>
+    <ul>
+      <li><a href="https://www.docker.com/docker-windows">Download hier</a></li>
+      <li>Support voor windows ge upgrade</li>
+      <li>Heeft HyperV nodig (Niet beschikbaar op alle Windows versies)</li>
+      <li>Deamon starten</li>
+      <li>Powershell</li>
+    </ul>
+    <li>Mac</li>
+    <ul>
+      <li><a href="https://store.docker.com/editions/community/docker-ce-desktop-mac?tab=descriptio://store.docker.com/editions/community/docker-ce-desktop-mac?tab=description">Download</a></li>
+      <li>Untested</li>
+    </ul>
+    <li>Linux</li>
+    <ul>
+      <li>sudo pacman -S docker</li>
+      <li>sudo apt-get install docker{,.io,-compose}</li>
+      <li>sudo systemctl enable docker</li>
+      <li>sudo usermod -aG 'docker_group' 'docker_user'</li>
+    </ul>
+  </ul>
+</section>
+<section>
+  <h2>Docker installatie verifiëren</h2>
+  <pre><code>
+docker version
+  </code></pre>
+  <pre><code>
+docker version
+Client:
+ Version:      17.04.0-ce
+ API version:  1.28
+ Go version:   go1.8
+ Git commit:   4845c567eb
+ Built:        Sat Apr  8 18:55:45 2017
+ OS/Arch:      linux/amd64
+
+Server:
+ Version:      17.04.0-ce
+ API version:  1.28 (minimum version 1.12)
+ Go version:   go1.8
+ Git commit:   4845c567eb
+ Built:        Sat Apr  8 18:55:45 2017
+ OS/Arch:      linux/amd64
+ Experimental: false
+
+  </code></pre>
+</section>
+<section>
+  <h3>Problement met installatie?</h3>
+  <ul>
+    <li>Dualboot met linux :)</li>
+    <li>DevOps gaat beter in hand met linux</li>
+    <li>In de examples map van de cursus repo staat een workaround</li>
+  </ul>
+</section>
+<section>
+  <h2>Docker Test Run</h2>
+  <pre><code>
+docker run -d --name web1 nginx
+  </code></pre>
+  <pre class="fragment"><code>
+docker run -d --name web2 -p 8080:80 nginx
+  </code></pre>
+  <pre class="fragment"><code>
+docker run -d --name web3 \
+  -p 8081:80 \
+  -v /vagrant/website:/usr/share/nginx/html
+  </code></pre>
+</section>
+<section>
+  <h2>Docker Commandos</h2>
+  <ul>
+    <li>Basics</li>
+    <pre><code>
+docker run 
+// run an image
+docker start / stop / restart
+// start / stop / restart container
+    </code></pre>
+    <li>Lopende containers</li>
+    <pre><code>docker ps</code></pre>
+    <pre><code>
+ubuntu@docker-example:/vagrant$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                  NAMES
+6dfab0a9f851        nginx               "nginx -g 'daemon off"   23 seconds ago       Up 22 seconds       0.0.0.0:8081->80/tcp   web3
+a594d0205ca2        nginx               "nginx -g 'daemon off"   About a minute ago   Up About a minute   80/tcp                 web1
+f1efe5d1cfb5        nginx               "nginx -g 'daemon off"   About a minute ago   Up About a minute   0.0.0.0:8080->80/tcp   web2
+    </code></pre>
+    <li>Voorbeeld</li>
+    <pre><code>
+docker stop f1efe5d1cfb5
+docker stop web3
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h2>Docker Commandos</h2>
+  <ul>
+    <li>Informatie verzamelen</li>
+    <pre><code>
+docker inspect web3
+    </code></pre>
+    <pre><code>
+[
+    {
+        "Mounts": [
+            {
+                "Source": "/vagrant/website",
+                "Destination": "/usr/share/nginx/html",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ]
+    }
+]
+    </code></pre>
+    <pre><code>
+docker logs web3
+    </code></pre>
+    <pre><code>
+192.168.16.1 - - [04/May/2017:00:21:52 +0000] "GET / HTTP/1.1" 200 160 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML,like Gecko) Chrome/57.0.2987.133 Safari/537.36" "-"
+2017/05/04 00:21:52 [error] 5#5: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2:No such file or directory), client: 192.168.16.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "192.168.16.10:8081",referrer: "http://192.168.16.10:8081/"
+192.168.16.1 - - [04/May/2017:00:21:52 +0000] "GET /favicon.ico HTTP/1.1" 404 571 "http://192.168.16.10:8081/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36" "-"
+    </code></pre>
+  </ul>
+</section>
+<section>
+  <h3>Docker Commandos</h3>
+  <ul>
+    <li>Verwijderen container</li>
+    <pre ><code>docker rm web3</code></pre>
+    <pre><code>docker rm $(docker ps -a -q)</code></pre>
+    <li>Verwijderen image</li>
+    <pre><code>docker rmi nginx</code></pre>
+    <pre><code>docker rmi $(docker images -a -q)</code></pre>
+  </ul>
+</section>
+<section>
+  <h3>Common Docker Commands</h3>
+  <pre><code>// General info
+man docker // man docker-run
+docker help // docker help run
+docker info
+docker version
+docker network ls
+
+// Images
+docker images // docker [IMAGE_NAME]
+docker pull [IMAGE] // docker push [IMAGE]
+
+// Containers
+docker run
+docker ps // docker ps -a, docker ps -l
+docker stop/start/restart [CONTAINER]
+docker stats [CONTAINER]
+docker top [CONTAINER]
+docker port [CONTAINER]
+docker inspect [CONTAINER]
+docker inspect -f "{{ .State.StartedAt }}" [CONTAINER]
+docker rm [CONTAINER]</code></pre>
+</section>
+<section>
+  <h3>The Dockerfile</h3>
+  <blockquote>
+    <p>A Dockerfile is a text document that contains all the commands a user could call on the command line to create an image.</p>
+  </blockquote>
+  <ul>
+  <li> Dockerfile voor webserver</li>
+  <pre><code>
+FROM nginx:latest
+COPY website /usr/share/nginx/html
+
+EXPOSE 80
+  </code></pre>
+    <li>Build container</li>
+    <pre><code>
+docker build -t myapp .
+    </code></pre>
+    <li><a href="https://github.com/digipolisantwerp/devopsdays_docker">Voorbeeld DevOpsDays Digipolis</a></li>
+  </ul>
+</section>
+<section>
+  <h3>Docker examples</h3>
+  <ul>
+    <li>SSH into a container</li>
+    <li>Build an image</li>
+    <li>Docker <a href="https://docs.docker.com/engine/userguide/containers/dockervolumes/">Volume</a></li>
+    <li><a href="https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/">Linked</a> containers</li>
+    <li>Using <a href="https://docs.docker.com/compose/">docker-compose</a></li>
+    <li>Scale containers with docker-compose</li>
+    <li>Share an image (share this presentation)</li>
+    <li>Package an app with its environment</li>
+    <li>Screen and sound within containers (x-forward)</li>
+  </ul>
+</section>
+<section>
+  <h3>Example: Docker link containers</h3>
+  <p>Let's create a <a href="https://hub.docker.com/_/drupal/">Drupal app</a> (apache, php, mysql, drupal)</p>
+  <pre><code>cd ~/Docker-presentation
+mkdir drupal-link-example
+cd drupal-link-example
+
+docker pull drupal:8.0.6-apache
+docker pull mysql:5.5
+
+// Start a container for mysql
+docker run --name mysql_example \
+           -e MYSQL_ROOT_PASSWORD=root \
+           -e MYSQL_DATABASE=drupal \
+           -e MYSQL_USER=drupal \
+           -e MYSQL_PASSWORD=drupal \
+           -d mysql:5.5
+
+// Start a Drupal container and link it with mysql
+// Usage: --link [name or id]:alias
+docker run -d --name drupal_example \
+           -p 8280:80 \
+           --link mysql_example:mysql \
+           drupal:8.0.6-apache
+
+// Open http://localhost:8280 to continue with the installation
+// On the db host use: mysql
+
+// There is a proper linking
+docker inspect -f "{{ .HostConfig.Links }}" drupal_example</code></pre>
+</section>
+<section>
+  <h3>Example: Using Docker Compose</h3>
+  <p>Let's create a Drupal app with <a href="https://github.com/theodorosploumis/docker-presentation/blob/gh-pages/examples/docker-compose/docker-compose.yml">docker-compose.yml</a></p>
+  <pre><code>cat docker-compose.yml
+docker-compose up -d</code></pre>
+</section>
+<section>
+  <h3>Example: Share a public Image</h3>
+  <pre><code>cd ~/Docker-presentation
+git clone git@github.com:theodorosploumis/docker-presentation.git
+cd docker-presentation
+
+docker pull nimmis/alpine-apache
+docker build -t tplcom/docker-presentation .
+
+// Test it
+docker run -itd --name docker_presentation \
+           -p 8480:80 \
+           tplcom/docker-presentation
+
+// Open http://localhost:8480, you should see this presentation
+
+// Push it on the hub.docker.com
+docker push tplcom/docker-presentation</code></pre>
+</section>
+<section>
+  <h3>Example: Export/Save/Load etc</h3>
+  <pre><code>docker pull nimmis/alpine-apache
+docker run -d --name apache_example \
+           nimmis/alpine-apache
+
+// Create a file inside the container.
+// See https://github.com/nimmis/docker-alpine-apache for details.
+docker exec -ti apache_example \
+            /bin/sh -c 'mkdir /test &amp;&amp; echo "This is it." &gt;&gt; /test/test.txt'
+
+// Test it. You should see message: "This is it."
+docker exec apache_example cat /test/test.txt
+
+// Commit the change.
+docker commit apache_export_example myapache:latest
+
+// Create a new container with the new image.
+docker run -d --name myapache_example myapache
+
+// You should see the new folder/file inside the myapache_example container.
+docker exec myapache_example cat /test/test.txt
+
+// Export the container as image
+cd ~/Docker-presentation
+docker export myapache_example &gt; myapache_example.tar
+
+// Import a new image from the exported files
+cd ~/Docker-presentation
+docker import myapache_example.tar myapache:new
+
+// Save a new image as tar
+docker save -o ~/Docker-presentation/myapache_image.tar myapache:new
+
+// Load an image from tar file
+docker load &lt; myapache_image.tar</code></pre>
+</section>
+<section>
+  <h3>Docker tips</h3>
+  <p>There are known best practices (see a list at <a href="https://github.com/theodorosploumis/docker-presentation/tree/gh-pages/examples/tips">examples/tips</a>)</p>
+  <ul>
+    <li>Optimize containers (check <a href="https://www.fromlatest.io/">fromlatest.io</a> and <a href="https://imagelayers.io">imagelayers.io</a>)</li>
+    <li>Create your own tiny base</li>
+    <li>Containers are not Virtual Machines</li>
+    <li>Create your private registry</li>
+    <li>Create shortcut commands</li>
+    <li>Be aware of the hub.docker.com docker agent version</li>
+  </ul>
+</section>
+<section>
+  <h3>The Docker war</h3>
+  <table>
+    <thead>
+      <tr>
+        <th align="center">Type</th>
+        <th>Software</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td align="center">Clustering/orchestration</td>
+        <td><a href="https://docs.docker.com/swarm/">Swarm</a>, <a href="http://kubernetes.io/">Kubernetes</a>, <a href="https://mesosphere.github.io/marathon/">Marathon</a>, <a href="https://github.com/signalfx/maestro-ng">MaestroNG</a>, <a href="http://decking.io/">decking</a>, <a href="http://shipyard-project.com/">shipyard</a></td>
+      </tr>
+      <tr>
+        <td align="center">Docker registries</td>
+        <td><a href="http://port.us.org/">Portus</a>, <a href="https://github.com/docker/distribution">Docker Distribution</a>, <a href="http://hub.docker.com">hub.docker.com</a>, <a href="https://quay.io">quay.io</a>, <a href="https://cloud.google.com/tools/container-registry/">Google container registry</a>, <a href="https://www.jfrog.com/artifactory/">Artifactory</a>, <a href="http://www.projectatomic.io/">projectatomic.io</a></td>
+      </tr>
+      <tr>
+        <td align="center">PaaS with Docker</td>
+        <td><a href="http://rancher.com/">Rancher</a>, <a href="https://tsuru.io/">Tsuru</a>, <a href="https://github.com/dokku/dokku">dokku</a>, <a href="https://flynn.io/">flynn</a>,  <a href="http://octohost.io/">Octohost</a>, <a href="http://deis.io/">DEIS</a></td>
+      </tr>
+      <tr>
+        <td align="center">OS made of Containers</td>
+        <td><a href="http://rancher.com/rancher-os/">RancherOS</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section>
+  <h3>Docker Alternatives</h3>
+  <ul>
+    <li><a href="https://github.com/coreos/rkt">Rocket, rkt</a></li>
+    <li><a href="https://linuxcontainers.org/">Linux Containers, LXC</a></li>
+    <li><a href="http://www.ubuntu.com/cloud/lxd">Linux container hypervisor, LXD</a></li>
+    <li><a href="https://www.freebsd.org/doc/handbook/jails.html">BSD Jails</a></li>
+    <li><a href="http://oracle.com/solaris">Solaris Zones</a></li>
+    <li><a href="http://research.microsoft.com/en-us/projects/drawbridge/">drawbridge</a></li>
+  </ul>
+</section>
+<section>
+  <h3>Instead of Resources</h3>
+  <ul>
+    <li><a href="https://github.com/veggiemonk/awesome-docker">Awesome Docker</a> (list of Docker resources &amp; projects)</li>
+    <li><a href="https://github.com/wsargent/docker-cheat-sheet">Docker cheat sheet</a></li>
+    <li><a href="https://www.manning.com/books/docker-in-practice">Docker in Practice</a>, <a href="http://www.dockerbook.com/">The Docker Book</a> (books)</li>
+    <li><a href="https://github.com/theodorosploumis/docker-presentation/tree/gh-pages/examples/shortcuts/docker-aliases.sh">Docker aliases/shortcuts</a></li>
+    <li>Docker <a href="https://www.docker.com/customers">case studies</a></li>
+  </ul>
+</section>
+<section>
+  <h3>Questions?</h3>
+  <p><img src="https://raw.githubusercontent.com/theodorosploumis/docker-presentation/gh-pages/img/docker_logo.png" alt="Pythons over Docker!"></p>
+  <p><a href="https://goo.gl/lkau9t">Review this presentation</a></p>
+  <blockquote>
+    <p>Next: Docker in production, Scaling, Private registries, PaaS.</p>
+  </blockquote>
+  <h6>In this presentation I have used <a href="http://ohmyz.sh/">oh my zsh</a>, <a href="https://github.com/docker/docker/releases/tag/v1.11.1">docker 1.11.1</a>, <a href="https://github.com/j-bennet/wharfee">wharfee</a> and <a href="https://github.com/moncho/dry">dry</a>.</h6>
+</section>
+
