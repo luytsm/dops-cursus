@@ -1,0 +1,13 @@
+---
+- name: Install haproxy
+  apt: name={{ item }} state=present
+  with_items:
+    - haproxy
+   
+- name: deploy haproxy conf
+  copy:
+    src: "{{ role_path }}/files/lb_config"
+    dest: /etc/haproxy/haproxy.cfg
+
+- name: restart haproxy
+  service: name=haproxy state=restarted

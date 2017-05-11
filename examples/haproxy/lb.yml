@@ -1,0 +1,5 @@
+- hosts: mgr
+  become: true
+  roles:
+   - lb
+
