@@ -1,0 +1,465 @@
+---
+title: 'Les 7: Continuous Integration'
+description:
+reveal:
+---
+<section>
+  <h1>Continuous Integration</h1>
+</section>
+<section>
+  <h1>DevOps Cyclus</h1>
+  <img style="margin: auto;" src="img/devops_cyclus.png" alt="">
+</section>
+<section data-background-image="img/plan.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/dev_test.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/release.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section data-background-image="img/monitor_learn.png" data-background-size="contain" data-background-color="#ffffff">
+</section>
+<section>
+  <h2>Continuous Integration</h2>
+  <h2>Is de eerste stap voor een volledige DevOps cyclus</h2>
+</section>
+<section>
+  <h1>Continuous Integration</h1>
+  <blockquote>
+    Continuous integration is an ongoing and <b>rapid process</b>. This means
+    that teams need to be able to <b>react quickly</b> when a <b>build breaks</b>
+    or new tests need to be built. In order to <b>integrate a quality</b> code
+    into existing features, it is important to <b>validate it against existing
+      tests</b>. If the tests <b>fail</b>, the code (build) should be
+    <b>rejected</b> until either the bugs are fixed or the test cases are
+    updated.  
+  </blockquote>
+</section>
+<section>
+  <h1>Continuous Integration</h1>
+  <div style="display: flex; align-items: center;">
+    <div style="text-align: left; width: 70%">
+      <h3>Met continuous integration </br>automatiseren we </h3>
+      <ul>
+        <li>Builds</li>
+        <li>Testing</li>
+      </ul>
+      <h3>Workflow</h3>
+      <ul>
+        <li>Code Schrijven</li>
+        <li>Code Commiten</li>
+        <li>Code Builden</li>
+        <li>Testen</li>
+      </ul>
+    </div>
+    <img style="height: 500px;" src="img/ci_loop.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>Continuteit Garanderen</h1>
+  <div style="display: flex; justify-content: space-around">
+    <ul>
+      <h5>
+        <li>Bewijs dat je code werkt</li>
+        <ul>
+          <li>Sofware kan je builden</li>
+          <li>Unit Test</li>
+        </ul>
+        <li>Fout Detectie</li>
+        <ul>
+          <li>Sneller</li>
+          <li>Bij elke verandering</li>
+          <li>Kostreductie</li>
+        </ul>
+        <li>Variabelen blijven constant</li>
+      </h5>
+    </ul>
+    <img style="height: 300px;" src="img/ci_trust.png" alt="">
+  </div>
+  <blockquote><b>Code not tested is broken by design</b></br><em>- Jacob Kaplan Moss</em></blockquote>
+</section>
+<section>
+  <h1>CI Implementeren</h1>
+  <ul>
+    <h5>
+      <li>Version Control</li>
+      <li>Infrastructure</li>
+      <li>Automated Builds</li>
+      <li>Automated Tests</li>
+      <li>Team Coördinatie</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h1>CI Good Practices</h1>
+  <ul>
+    <h5>
+      <li>Maintain a Single Source Repository.</li>
+      <li>Automate the Build</li>
+      <li>Make Your Build Self-Testing</li>
+      <li>Everyone Commits To the Mainline Every Day</li>
+      <li>Every Commit Should Build the Mainline on an Integration Machine</li>
+      <li>Keep the Build Fast</li>
+      <li>Test in a Clone of the Production Environment</li>
+      <li>Make it Easy for Anyone to Get the Latest Executable</li>
+      <li>Everyone can see what's happening</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h1>Maintain a Single Source Repository.</h1>
+  <ul>
+    <h5>
+      <li>Gebruik VCS (git)</li>
+      <li>Geen shared folders / drives / dropbox</li>
+      <li>Toegankelijk voor alle developers</li>
+      <li>Source code + bestanden voor builds en development</li>
+      <li>Gebruik branches voor features</li>
+      <li>Geen “binaries”</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h1>Automate the Build</h1>
+  <ul>
+    <h5>
+      <li>Automatiseer alles</li>
+      <li>Opzetten van Databases</li>
+      <li>Compileren van binaries</li>
+      <li>Files naar de juiste locatie kopieren </li>
+      <li>Build alleen de veranderingen</li>
+      <li>Build buiten een IDE</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h1>Make Your Build Self-Testing</h1>
+  <ul>
+    <h5>
+      <li>Static vs Dynamic Langauge</li>
+      <li>Linting</li>
+      <li>Run unit testing</li>
+      <li>Creeer test coverage report</li>
+      <li>Testen zijn niet onfeilbaar</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h2>Everyone Commits To the Mainline Every Day</h2>
+  <ul>
+    <h5>
+      <li>Teamwork = Communicatie → Commit = Communicatie</li>
+      <li>Testbuild voor dat je commit</li>
+      <li>Conflict detectie</li>
+      <ul>
+        <li>Sneller is beter</li>
+        <li>Meer tijd -> Moeilijkheid omhoog.</li>
+      </ul>
+      <li>Meerdere commits / dag is beter.</li>
+    </h5>
+  </ul>
+</section>
+<section style="text-align: left;">
+  <h1>Keep the build fast</h1>
+  <div style="display: flex; align-items: center;">
+    <ul style="width: 70%">
+      <h5>
+        <li>Te wijten aan niet geoptimaliseerde compilers</li>
+        <li>Rekenkracht is geen probleem meer</li>
+      </h5>
+    </ul>
+    <img style="height: 500px;" src="img/compiling.png" alt="">
+  </div>
+</section>
+<section style="text-align: left;">
+  <h2>Make it Easy for Anyone to Get the Latest Executable</h2>
+  <ul>
+    <h5>
+      <li>Rollback + Updates</li>
+      <li>Niet technisch personeel</li>
+    </h5>
+  </ul>
+  <h2>Everyone can see what's happening</h2>
+  <ul>
+    <h5>
+      <li>Communicatie is key</li>
+      <li>Developers moeten kunnen zien ofdat de build failed of passed is.</li>
+    </h5>
+  </ul>
+</section>
+<section>
+  <h3>Welke tools zijn er beschikbaar?</h3>
+  <h2 class='fragment'>Genoeg</h2>
+  <h4 class='fragment'>Geen reden om niet aan CI te doen!</h4>
+</section>
+<section>
+  <h2>CI Tools</h2>
+  <img class="plain" style="background: none;" src="img/ci-tools.png" alt="">
+</section>
+<section>
+  <h2>Welke gaan wij gebruiken?</h2>
+  <div style="display: flex; justify-content: space-around">
+    <div style="display: flex; flex-direction: column">
+      <h3 class="fragment">Travis CI</h3>
+      <ul>
+        <li class="fragment">Commercial</li>
+        <li class="fragment">Service</li>
+        <li class="fragment">Convention</li>
+        <li class="fragment">Easy to Use</li>
+      </ul>
+      <img class="fragment plain" style="background: none; height: 250px;" src="img/travis_logo.png" alt="">
+    </div>
+    <div style="display: flex; flex-direction: column">
+      <h3 class="fragment">Jenkins</h3>
+      <ul>
+        <li class="fragment">Open Source</li>
+        <li class="fragment">Applicatie (Self Hosted)</li>
+        <li class="fragment">Configureerbaar</li>
+        <li class="fragment">Flexible</li>
+      </ul>
+      <img class="fragment plain" style="background: none; height: 250px; object-fit:contain;" src="img/jenkins_logo.png" alt="">
+    </div>
+  </div>
+</section>
+<section style="text-align:left;">
+  <h2>Beide tools</h2>
+    <ul>
+      <li>
+        <h5>Kleine leercurve</h5>
+      </li>
+      <li>
+        <h5>Goed gedocumenteerd</h5>
+      </li>
+      <li>
+        <h5>Service vs Self Hosted</h5>
+      </li>
+      <li>
+        <h5>Geen grote stap naar Continuous Delivery / Deployment</h5>
+      </li>
+    </ul>
+</section>
+<section style="text-align:left;">
+  <h2>Het succes van deze tools is gekoppeld aan ... </h2>
+  <h1 class="fragment">Het schrijven van testen</h1>
+</section>
+<section>
+  <h2>Wat doet travis voor u</h2>
+  <div style="display: flex; justify-content: space-around">
+    <div>
+      <ul>
+        <li>
+          <h5 class="fragment">Houd je GitHub repo in het oog</h5>
+        </li>
+        <li>
+          <h5 class="fragment">Voor de testen uit</h5>
+        </li>
+        <li>
+          <h5 class="fragment">Voorziet feedback</h5>
+        </li>
+        <li>
+          <h5 class="fragment">Bouwt artifacten</h5>
+        </li>
+        <li>
+          <h5 class="fragment">Kan code kwaliteit nazien </h5>
+        </li>
+        <li>
+          <h5 class="fragment">Kan je applicatie deployen naar verschillend PaaS </h5>
+        </li>
+      </ul>
+      <h3 class="fragment">Hangt allemaal af van je configuratie</h3>
+    </div>
+    <img class='plain' style="background: none" src="img/travis_logo.png" alt="">
+  </div>
+</section>
+<section>
+  <h2>Starten met Travis CI</h2>
+  <div style="display: flex; justify-content: space-around">
+    <ul>
+      <h5>
+        <li>https://travis-ci.org</li>
+      </h5>
+      <h5>
+        <li>Account maken</li>
+      </h5>
+      <h5>
+        <li>Koppelen met GitHub</li>
+      </h5>
+      <h5>
+        <li>Repository Activeren</li>
+      </h5>
+      <h5>
+        <li>Configuratie Opzetten</li>
+      </h5>
+      <h5>
+        <li>Push Configuratie</li>
+      </h5>
+      <h5>
+        <li>Code wordt geïntrigeerd</li>
+      </h5>
+      <h5>
+        <li>Alleen maar testen mogelijk op een Linux Box of OSX</li>
+        <ul>
+          <li>Android testen ook mogelijk</li>
+        </ul>
+      </h5>
+    </ul>
+    <img class='plain' style="background: none" src="img/travis_logo.png" alt="">
+  </div>
+</section>
+<section>
+  <h2>Travis Configuratie</h2>
+  <a href="https://raw.githubusercontent.com/plaindocs/travis-broken-example/master/.travis.yml">Travis Broken Example</a>
+  <pre><code class="yaml">
+language: php
+php:
+  - 5.5
+  - 5.4
+  - hhvm
+script: phpunit Test.php
+  </code></pre>
+  <strong>
+    <code style='display:inline;'>.travis.yml</code> bestand in de root folder van de repo
+  </strong>
+  </br>
+  <strong>
+    Travis ondersteund vele talen
+  </strong>
+  </br>
+  <strong>
+    Een travis configuratie bestand maakt gebruikt van YAML
+  </strong>
+</section>
+<section>
+  <h2>Travis Configuratie</h2>
+  <h4>The Build Lifecycle</h4>
+  <div style="display: flex; justify-content: space-around">
+    <ul>
+      <li><code style='display: inline;'>before_install</code></li>
+      <li><code style='display: inline;'>install</code></li>
+      <li><code style='display: inline;'>before_script</code></li>
+      <li><code style='display: inline;'>script</code></li>
+      <li><code style='display: inline;'>after_succes</code></li>
+      <li><code style='display: inline;'>after_failure</code></li>
+      <li><code style='display: inline;'>after_script</code></li>
+    </ul>
+     <img class='plain' style="background: none" src="img/travis_logo.png" alt="">
+  </div>
+  <em>The Build Lifecycle beschrijft de stappen voor het compilatie/test/deploy sequentie</em>
+</section>
+<section>
+  <h2>Travis Configuratie</h2>
+  <h4>Services</h4>
+  <div style="display: flex; justify-content: space-around">
+    <ul>
+      <h5>
+        <li>Mogelijk tot draaien van vaak voorkomende applicaties</li>
+      </h5>
+      <h5>
+        <li>Testen met DB</li>
+      </h5>
+      <h5>
+        <li>MQTT</li>
+      </h5>
+      <h5>
+        <li>Docker</li>
+      </h5>
+    </ul>
+  <pre><code>
+services:
+  - mysql
+  - mongodb
+  - docker
+  </code></pre>
+  </div>
+</section>
+<section>
+  <h2>Er zijn vrij veel configuratie mogelijkheden</h2>
+  <h2>We kunnen ze niet allemaal zien</h2>
+  <h2><a href="https://docs.travis-ci.com/">Er is een uitgebreide documentatie</a></h2>
+</section>
+<section>
+  <h2>Travis Client</h2>
+  <div style="display: flex; justify-content: space-around">
+    <ul>
+      <li>CLI Tool</li>
+      <li><a href="https://github.com/travis-ci/travis.rb#readme">Git Repo</a></li>
+      <li>Linting</li>
+      <li>Encryptie</li>
+    </ul>
+    <img class='plain' style="background: none" src="img/travis_logo.png" alt="">
+  </div>
+</section>
+<section>
+  <h1>Demo</h1>
+  <a href="https://github.com/luytsm/docker-ci-demo">Continuous Integration of Dockerized Applications with Travis CI </a>
+  </br>
+  <em>Een simple CRUD Flask Applicatie met een MySQL Database</em>
+</section>
+<section>
+  <h2>Demo</h2>
+  <h4>Project structuur</h4>
+  <pre><code>
+docker-ci-demo
+├── backend
+│   ├── app.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── test_app.py
+├── db
+│   ├── AdventureWorks.sql.tar.gz
+│   ├── Dockerfile
+│   ├── my.cnf
+│   └── README.md
+├── docker-compose.yml
+├── README.md  
+└── .travis.yml
+
+  </code></pre>
+</section>
+<section>
+  <h2>Demo</h2>
+  <h4>Applicatie runnen</h4>
+  <ul>
+    <li><code style='display: inline;'>docker compose up -d</code></li>
+    <li>Ga naar localhost op je host omgeving</li>
+    <li><code style='display: inline;'>docker exec -it web python test_app.p</code></li>
+</section>
+<section>
+  <h2>Demo</h2>
+  <h4>Configuratie bestand</h4>
+  <code style="display:inline;">.travis.yml</code>
+  <pre><code class=yaml>
+services:
+  - docker
+
+before_install:
+  - >
+    curl -sSL "https://get.docker.com/gpg" |
+     sudo -E apt-key add -
+  - >
+    echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" |
+     sudo tee -a /etc/apt/sources.list
+  - sudo apt-get update
+  - >
+    sudo apt-get -o Dpkg::Options::="--force-confdef" \
+     -o Dpkg::Options::="--force-confold" --assume-yes install docker-engine
+  - docker version
+  - sudo pip install docker-compose
+  - docker-compose version
+
+before_script:
+  - docker-compose up --build -d
+
+script:
+  - docker exec -it web python test_app.py
+
+after_script:
+  - docker exec -it web coverage run test_app.py
+  - docker exec -it web coverage report
+  - docker-compose down
+  </code></pre>
+</section>
+<section>
+  <h2>Demo</h2>
+  <h4>Resultaat</h4>
+  <img src="img/travis_ci_result.png" alt="">
+</section>
